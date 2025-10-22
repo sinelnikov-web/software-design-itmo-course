@@ -81,10 +81,10 @@ jobs:
     - name: Build
       run: go build -buildvcs=false -v ./cmd/gocli
 
-    - name: Build binary
-      run: |
-        if [ "${{ matrix.os }}" == "windows-latest" ]; then
-          go build -buildvcs=false -o gocli-cli.exe ./cmd/gocli
-        else
-          go build -buildvcs=false -o gocli-cli ./cmd/gocli
-        fi
+    - name: Build binary (Windows)
+      if: matrix.os == 'windows-latest'
+      run: go build -buildvcs=false -o gocli-cli.exe ./cmd/gocli
+
+    - name: Build binary (Unix)
+      if: matrix.os != 'windows-latest'
+      run: go build -buildvcs=false -o gocli-cli ./cmd/gocli
