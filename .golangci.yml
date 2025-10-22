@@ -1,0 +1,35 @@
+run:
+  timeout: 5m
+  issues-exit-code: 1
+  tests: true
+  build-tags: ""
+
+linters:
+  enable:
+    - gofmt
+    - goimports
+    - govet
+    - errcheck
+    - staticcheck
+    - unused
+    - gosimple
+    - ineffassign
+    - typecheck
+    - goconst
+    - gocyclo
+    - revive
+    - mnd
+
+linters-settings:
+  gocyclo:
+    min-complexity: 30
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - mnd
+        - gocyclo

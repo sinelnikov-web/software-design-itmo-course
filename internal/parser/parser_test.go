@@ -1,0 +1,162 @@
+package parser
+
+import (
+	"testing"
+
+	"gocli/internal/lexer"
+)
+
+func TestParser_Parse(t *testing.T) {
+	tests := []struct {
+		name     string
+		tokens   []lexer.Token
+		expected Node
+		wantErr  bool
+	}{
+		{
+			name: "simple command",
+			tokens: []lexer.Token{
+				{Type: lexer.WORD, Value: "echo"},
+				{Type: lexer.WORD, Value: "hello"},
+			},
+			expected: &Command{
+				Name: "echo",
+				Args: []*Argument{{Value: "hello", Quoted: false}},
+			},
+			wantErr: false,
+		},
+		{
+			name: "command with assignment",
+			tokens: []lexer.Token{
+				{Type: lexer.ASSIGN, Value: "VAR"},
+				{Type: lexer.WORD, Value: "value"},
+				{Type: lexer.WORD, Value: "echo"},
+				{Type: lexer.WORD, Value: "hello"},
+			},
+			expected: &Command{
+				Name:        "echo",
+				Args:        []*Argument{{Value: "hello", Quoted: false}},
+				Assignments: []*Assignment{{Name: "VAR", Value: &Argument{Value: "value", Quoted: false}}},
+			},
+			wantErr: false,
+		},
+		{
+			name: "command with quotes",
+			tokens: []lexer.Token{
+				{Type: lexer.WORD, Value: "echo"},
+				{Type: lexer.SQUOTE, Value: "hello world"},
+			},
+			expected: &Command{
+				Name: "echo",
+				Args: []*Argument{{Value: "hello world", Quoted: true}},
+			},
+			wantErr: false,
+		},
+		{
+			name: "pipeline with two commands",
+			tokens: []lexer.Token{
+				{Type: lexer.WORD, Value: "echo"},
+				{Type: lexer.WORD, Value: "hello"},
+				{Type: lexer.PIPE, Value: "|"},
+				{Type: lexer.WORD, Value: "wc"},
+			},
+			expected: &Pipeline{
+				Commands: []*Command{
+					{Name: "echo", Args: []*Argument{{Value: "hello", Quoted: false}}},
+					{Name: "wc", Args: []*Argument{}},
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name:     "empty command",
+			tokens:   []lexer.Token{},
+			expected: nil,
+			wantErr:  true,
+		},
+	}
+
+	parser := NewParser()
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result, err := parser.Parse(tt.tokens)
+
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Parser.Parse() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+
+			if !tt.wantErr {
+				if !compareNodes(result, tt.expected) {
+					t.Errorf("Parser.Parse() = %v, expected %v", result, tt.expected)
+				}
+			}
+		})
+	}
+}
+
+func compareNodes(a, b Node) bool {
+	if a == nil && b == nil {
+		return true
+	}
+	if a == nil || b == nil {
+		return false
+	}
+
+	switch aCmd := a.(type) {
+	case *Command:
+		if bCmd, ok := b.(*Command); ok {
+			return compareCommands(aCmd, bCmd)
+		}
+	case *Pipeline:
+		if bPipeline, ok := b.(*Pipeline); ok {
+			return comparePipelines(aCmd, bPipeline)
+		}
+	}
+
+	return false
+}
+
+func compareCommands(a, b *Command) bool {
+	if a.Name != b.Name {
+		return false
+	}
+	if len(a.Args) != len(b.Args) {
+		return false
+	}
+	for i, arg := range a.Args {
+		if !compareArguments(arg, b.Args[i]) {
+			return false
+		}
+	}
+	if len(a.Assignments) != len(b.Assignments) {
+		return false
+	}
+	for i, assignment := range a.Assignments {
+		if !compareAssignments(assignment, b.Assignments[i]) {
+			return false
+		}
+	}
+	return true
+}
+
+func compareArguments(a, b *Argument) bool {
+	return a.Value == b.Value && a.Quoted == b.Quoted
+}
+
+func compareAssignments(a, b *Assignment) bool {
+	return a.Name == b.Name && compareArguments(a.Value, b.Value)
+}
+
+func comparePipelines(a, b *Pipeline) bool {
+	if len(a.Commands) != len(b.Commands) {
+		return false
+	}
+	for i, cmd := range a.Commands {
+		if !compareCommands(cmd, b.Commands[i]) {
+			return false
+		}
+	}
+	return true
+}
