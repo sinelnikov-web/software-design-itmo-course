@@ -1,6 +1,13 @@
 # software-design-itmo-course
 # GoCLI
 
+[![Go Version](https://img.shields.io/badge/Go-1.25-blue)](https://go.dev/)
+[![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT)
+
+[![Build](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/ci.yml/badge.svg)](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/ci.yml)
+[![Lint](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/ci.yml)
+
+
 Минималистичный интерпретатор командной строки, написанный на Go.
 
 ## Возможности
@@ -14,7 +21,7 @@
 ## Сборка и запуск
 
 ### Требования
-- Go 1.21 или выше
+- Go 1.25 или выше
 
 ### Сборка и запуск
 ```bash
