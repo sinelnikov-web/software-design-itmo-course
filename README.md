@@ -4,10 +4,9 @@
 [![Go Version](https://img.shields.io/badge/Go-1.25-blue)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT)
 
-[![Build](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/ci.yml/badge.svg)](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/ci.yml)
-[![Lint](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/ci.yml)
-
-
+[![Build](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/build.yml/badge.svg)](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/build.yml)
+[![Lint](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/lint.yml/badge.svg)](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/lint.yml)
+[![Tests](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/test.yml/badge.svg)](https://github.com/sinelnikov-web/software-design-itmo-course/actions/workflows/test.yml)
 Минималистичный интерпретатор командной строки, написанный на Go.
 
 ## Возможности
