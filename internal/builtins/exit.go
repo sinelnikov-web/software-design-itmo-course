@@ -1,6 +1,7 @@
 package builtins
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"strconv"
@@ -25,12 +26,29 @@ func (e *ExitCommand) Name() string {
 // Execute выполняет команду exit.
 // Если передан аргумент, использует его как код возврата.
 // Иначе завершает работу с кодом 0.
-func (e *ExitCommand) Execute(args []string, _ map[string]string, _ io.Reader, _ io.Writer, _ io.Writer) int {
+//
+// Поведение:
+//   - Без аргументов: завершает с кодом 0 (успех)
+//   - С числовым аргументом: завершает с указанным кодом (0-255)
+//   - С невалидным аргументом: выводит ошибку в stderr и завершает с кодом 2
+//   - Коды выхода вне диапазона 0-255: приводятся к диапазону 0-255 (по модулю 256)
+func (e *ExitCommand) Execute(args []string, _ map[string]string, _ io.Reader, _ io.Writer, stderr io.Writer) int {
 	exitCode := 0
 
 	if len(args) > 0 {
-		if code, err := strconv.Atoi(args[0]); err == nil {
-			exitCode = code
+		code, err := strconv.Atoi(args[0])
+		if err != nil {
+			// Невалидный аргумент: выводим ошибку и завершаем с кодом 2
+			fmt.Fprintf(stderr, "exit: %s: numeric argument required\n", args[0])
+			os.Exit(2)
+			return 2
+		}
+
+		// Приводим код к диапазону 0-255 (стандартный диапазон кодов выхода)
+		// Отрицательные числа и числа > 255 приводятся к диапазону
+		exitCode = code % 256
+		if exitCode < 0 {
+			exitCode += 256
 		}
 	}
 

@@ -34,17 +34,17 @@ func NewEnvironment() *Environment {
 
 // Set устанавливает переменную в локальном окружении.
 // Локальные переменные имеют приоритет над глобальными.
-func (e *Environment) Set(name, value string) {
-	e.local[name] = value
+func (env *Environment) Set(name, value string) {
+	env.local[name] = value
 }
 
 // Get возвращает значение переменной.
 // Сначала проверяет локальные, затем глобальные переменные.
-func (e *Environment) Get(name string) (string, bool) {
-	if value, exists := e.local[name]; exists {
+func (env *Environment) Get(name string) (string, bool) {
+	if value, exists := env.local[name]; exists {
 		return value, true
 	}
-	if value, exists := e.global[name]; exists {
+	if value, exists := env.global[name]; exists {
 		return value, true
 	}
 	return "", false
@@ -52,14 +52,14 @@ func (e *Environment) Get(name string) (string, bool) {
 
 // GetAll возвращает все переменные окружения для передачи внешним командам.
 // Объединяет глобальные и локальные переменные (локальные имеют приоритет).
-func (e *Environment) GetAll() []string {
+func (env *Environment) GetAll() []string {
 	all := make(map[string]string)
 
-	for k, v := range e.global {
+	for k, v := range env.global {
 		all[k] = v
 	}
 
-	for k, v := range e.local {
+	for k, v := range env.local {
 		all[k] = v
 	}
 
@@ -71,29 +71,67 @@ func (e *Environment) GetAll() []string {
 }
 
 // Unset удаляет переменную из локального окружения.
-func (e *Environment) Unset(name string) {
-	delete(e.local, name)
+func (env *Environment) Unset(name string) {
+	delete(env.local, name)
 }
 
 // ClearLocal очищает все локальные переменные.
-func (e *Environment) ClearLocal() {
-	e.local = make(map[string]string)
+func (env *Environment) ClearLocal() {
+	env.local = make(map[string]string)
 }
 
 // ListLocal возвращает список локальных переменных.
-func (e *Environment) ListLocal() map[string]string {
-	result := make(map[string]string, len(e.local))
-	for k, v := range e.local {
+func (env *Environment) ListLocal() map[string]string {
+	result := make(map[string]string, len(env.local))
+	for k, v := range env.local {
 		result[k] = v
 	}
 	return result
 }
 
 // ListGlobal возвращает список глобальных переменных.
-func (e *Environment) ListGlobal() map[string]string {
-	result := make(map[string]string, len(e.global))
-	for k, v := range e.global {
+func (env *Environment) ListGlobal() map[string]string {
+	result := make(map[string]string, len(env.global))
+	for k, v := range env.global {
 		result[k] = v
 	}
 	return result
+}
+
+// GetAllMap возвращает все переменные окружения в виде map[string]string.
+// Объединяет глобальные и локальные переменные (локальные имеют приоритет).
+// Используется для передачи переменных окружения во встроенные команды.
+func (env *Environment) GetAllMap() map[string]string {
+	result := make(map[string]string)
+
+	// Сначала копируем глобальные переменные
+	for k, v := range env.global {
+		result[k] = v
+	}
+
+	// Затем перезаписываем локальными (локальные имеют приоритет)
+	for k, v := range env.local {
+		result[k] = v
+	}
+
+	return result
+}
+
+// HasLocal проверяет, существует ли переменная в локальном окружении.
+func (env *Environment) HasLocal(name string) bool {
+	_, exists := env.local[name]
+	return exists
+}
+
+// HasGlobal проверяет, существует ли переменная в глобальном окружении.
+func (env *Environment) HasGlobal(name string) bool {
+	_, exists := env.global[name]
+	return exists
+}
+
+// GetLocal возвращает значение переменной из локального окружения.
+// Возвращает значение и флаг существования.
+func (env *Environment) GetLocal(name string) (string, bool) {
+	value, exists := env.local[name]
+	return value, exists
 }

@@ -6,6 +6,9 @@ import (
 	"testing"
 )
 
+// TestCatCommand_Execute тестирует выполнение команды cat с различными сценариями.
+// Проверяет чтение из stdin при отсутствии аргументов и обработку ошибок
+// при попытке чтения несуществующих файлов.
 func TestCatCommand_Execute(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -60,6 +63,8 @@ func TestCatCommand_Execute(t *testing.T) {
 	}
 }
 
+// TestCatCommand_ExecuteWithStdin тестирует выполнение команды cat при чтении из stdin.
+// Проверяет, что команда корректно читает и выводит данные из стандартного ввода.
 func TestCatCommand_ExecuteWithStdin(t *testing.T) {
 	command := NewCatCommand()
 
@@ -81,6 +86,8 @@ func TestCatCommand_ExecuteWithStdin(t *testing.T) {
 	}
 }
 
+// TestCatCommand_Name тестирует получение имени команды cat.
+// Проверяет, что команда возвращает корректное имя "cat".
 func TestCatCommand_Name(t *testing.T) {
 	command := NewCatCommand()
 	expected := "cat"

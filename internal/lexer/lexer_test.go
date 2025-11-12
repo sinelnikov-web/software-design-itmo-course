@@ -4,6 +4,9 @@ import (
 	"testing"
 )
 
+// TestLexer_Tokenize тестирует токенизацию входной строки.
+// Проверяет корректную обработку простых команд, кавычек (одинарных и двойных),
+// пайпов, присваиваний переменных и обработку ошибок для незакрытых кавычек.
 func TestLexer_Tokenize(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -104,6 +107,9 @@ func TestLexer_Tokenize(t *testing.T) {
 	}
 }
 
+// TestLexer_isValidVariableName тестирует валидацию имен переменных.
+// Проверяет корректность определения валидных и невалидных имен переменных
+// согласно правилам: начинаться с буквы или подчеркивания, содержать только буквы, цифры и подчеркивания.
 func TestLexer_isValidVariableName(t *testing.T) {
 	tests := []struct {
 		name     string

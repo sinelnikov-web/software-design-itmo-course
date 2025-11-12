@@ -82,27 +82,15 @@ func (p *Parser) parseCommand(tokens []lexer.Token) (*Command, error) {
 		token := tokens[i]
 
 		if token.Type == lexer.ASSIGN {
-			if i+1 >= len(tokens) {
-				return nil, fmt.Errorf("assignment without value")
-			}
-
-			nextToken := tokens[i+1]
-			if nextToken.Type != lexer.WORD && nextToken.Type != lexer.SQUOTE && nextToken.Type != lexer.DQUOTE {
-				return nil, fmt.Errorf("invalid assignment value")
-			}
-
-			assignment := &Assignment{
-				Name:  token.Value,
-				Value: p.createArgument(nextToken),
+			assignment, skip, err := p.parseAssignment(tokens, i)
+			if err != nil {
+				return nil, err
 			}
 			command.Assignments = append(command.Assignments, assignment)
-			i++
+			i += skip
 		} else {
-			if command.Name == "" {
-				command.Name = token.Value
-			} else {
-				arg := p.createArgument(token)
-				command.Args = append(command.Args, arg)
+			if err := p.addTokenToCommand(command, token); err != nil {
+				return nil, err
 			}
 		}
 	}
@@ -112,6 +100,36 @@ func (p *Parser) parseCommand(tokens []lexer.Token) (*Command, error) {
 	}
 
 	return command, nil
+}
+
+// parseAssignment обрабатывает присваивание переменной из токенов.
+// Возвращает созданное присваивание, количество пропущенных токенов и ошибку.
+func (p *Parser) parseAssignment(tokens []lexer.Token, i int) (*Assignment, int, error) {
+	if i+1 >= len(tokens) {
+		return nil, 0, fmt.Errorf("assignment without value")
+	}
+
+	nextToken := tokens[i+1]
+	if nextToken.Type != lexer.WORD && nextToken.Type != lexer.SQUOTE && nextToken.Type != lexer.DQUOTE {
+		return nil, 0, fmt.Errorf("invalid assignment value")
+	}
+
+	assignment := &Assignment{
+		Name:  tokens[i].Value,
+		Value: p.createArgument(nextToken),
+	}
+	return assignment, 1, nil
+}
+
+// addTokenToCommand добавляет токен к команде (как имя команды или аргумент).
+func (p *Parser) addTokenToCommand(command *Command, token lexer.Token) error {
+	if command.Name == "" {
+		command.Name = token.Value
+	} else {
+		arg := p.createArgument(token)
+		command.Args = append(command.Args, arg)
+	}
+	return nil
 }
 
 func (p *Parser) createArgument(token lexer.Token) *Argument {

@@ -6,6 +6,9 @@ import (
 	"testing"
 )
 
+// TestWcCommand_Execute тестирует выполнение команды wc с различными входными данными.
+// Проверяет подсчет строк, слов и байт для различных сценариев: пустой ввод,
+// одна строка, несколько строк с пробелами, и обработку ошибок для несуществующих файлов.
 func TestWcCommand_Execute(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -81,6 +84,8 @@ func TestWcCommand_Execute(t *testing.T) {
 	}
 }
 
+// TestWcCommand_Count тестирует внутренний метод count команды wc.
+// Проверяет корректность подсчета строк, слов и байт для различных входных данных.
 func TestWcCommand_Count(t *testing.T) {
 	command := NewWcCommand()
 
@@ -139,6 +144,8 @@ func TestWcCommand_Count(t *testing.T) {
 	}
 }
 
+// TestWcCommand_Name тестирует получение имени команды wc.
+// Проверяет, что команда возвращает корректное имя "wc".
 func TestWcCommand_Name(t *testing.T) {
 	command := NewWcCommand()
 	expected := "wc"

@@ -5,6 +5,9 @@ import (
 	"testing"
 )
 
+// TestEchoCommand_Execute тестирует выполнение команды echo с различными аргументами.
+// Проверяет корректность вывода для одного аргумента, нескольких аргументов,
+// отсутствия аргументов и пустой строки.
 func TestEchoCommand_Execute(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -53,6 +56,8 @@ func TestEchoCommand_Execute(t *testing.T) {
 	}
 }
 
+// TestEchoCommand_Name тестирует получение имени команды echo.
+// Проверяет, что команда возвращает корректное имя "echo".
 func TestEchoCommand_Name(t *testing.T) {
 	command := NewEchoCommand()
 	expected := "echo"

@@ -6,6 +6,9 @@ import (
 	"gocli/internal/lexer"
 )
 
+// TestParser_Parse тестирует парсинг токенов в AST.
+// Проверяет корректное построение AST для простых команд, команд с присваиваниями,
+// команд с кавычками, пайплайнов и обработку ошибок для пустых команд.
 func TestParser_Parse(t *testing.T) {
 	tests := []struct {
 		name     string
