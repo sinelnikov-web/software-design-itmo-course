@@ -84,11 +84,21 @@ func (a *Assignment) String() string {
 	return a.Name + "=" + a.Value.String()
 }
 
+// QuoteType определяет тип кавычек для аргумента.
+type QuoteType int
+
+const (
+	NoQuote     QuoteType = iota // Аргумент без кавычек
+	SingleQuote                  // Одинарные кавычки (')
+	DoubleQuote                  // Двойные кавычки (")
+)
+
 // Argument представляет аргумент команды в AST.
-// Содержит значение аргумента и флаг, указывающий, был ли он в кавычках.
+// Содержит значение аргумента и информацию о типе кавычек.
 type Argument struct {
-	Value  string // Значение аргумента
-	Quoted bool   // Флаг: был ли аргумент в кавычках
+	Value     string    // Значение аргумента
+	Quoted    bool      // Флаг: был ли аргумент в кавычках (для обратной совместимости)
+	QuoteType QuoteType // Тип кавычек: NoQuote, SingleQuote или DoubleQuote
 }
 
 // Type возвращает тип узла Argument.

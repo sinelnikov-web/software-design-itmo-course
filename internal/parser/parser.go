@@ -133,9 +133,23 @@ func (p *Parser) addTokenToCommand(command *Command, token lexer.Token) error {
 }
 
 func (p *Parser) createArgument(token lexer.Token) *Argument {
-	quoted := token.Type == lexer.SQUOTE || token.Type == lexer.DQUOTE
+	var quoteType QuoteType
+	quoted := false
+
+	switch token.Type {
+	case lexer.SQUOTE:
+		quoted = true
+		quoteType = SingleQuote
+	case lexer.DQUOTE:
+		quoted = true
+		quoteType = DoubleQuote
+	default:
+		quoteType = NoQuote
+	}
+
 	return &Argument{
-		Value:  token.Value,
-		Quoted: quoted,
+		Value:     token.Value,
+		Quoted:    quoted,
+		QuoteType: quoteType,
 	}
 }

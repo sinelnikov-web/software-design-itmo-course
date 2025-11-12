@@ -58,7 +58,7 @@ func TestExecutor_ExecuteCommand(t *testing.T) {
 			name: "echo command",
 			command: &parser.Command{
 				Name: "echo",
-				Args: []*parser.Argument{{Value: "hello", Quoted: false}},
+				Args: []*parser.Argument{{Value: "hello", Quoted: false, QuoteType: parser.NoQuote}},
 			},
 			wantErr: false,
 		},
@@ -105,7 +105,7 @@ func TestExecutor_ExecutePipeline(t *testing.T) {
 			name: "single command pipeline",
 			pipeline: &parser.Pipeline{
 				Commands: []*parser.Command{
-					{Name: "echo", Args: []*parser.Argument{{Value: "hello", Quoted: false}}},
+					{Name: "echo", Args: []*parser.Argument{{Value: "hello", Quoted: false, QuoteType: parser.NoQuote}}},
 				},
 			},
 			wantErr: false,
@@ -114,11 +114,11 @@ func TestExecutor_ExecutePipeline(t *testing.T) {
 			name: "multiple commands pipeline",
 			pipeline: &parser.Pipeline{
 				Commands: []*parser.Command{
-					{Name: "echo", Args: []*parser.Argument{{Value: "hello", Quoted: false}}},
+					{Name: "echo", Args: []*parser.Argument{{Value: "hello", Quoted: false, QuoteType: parser.NoQuote}}},
 					{Name: "wc", Args: []*parser.Argument{}},
 				},
 			},
-			wantErr: true, // Pipeline execution not implemented in Phase 1
+			wantErr: false, // Pipeline execution now implemented
 		},
 	}
 
@@ -148,11 +148,11 @@ func TestExecutor_ExecuteCommandWithAssignments(t *testing.T) {
 		Assignments: []*parser.Assignment{
 			{
 				Name:  "TEMP_VAR",
-				Value: &parser.Argument{Value: "temp_value", Quoted: false},
+				Value: &parser.Argument{Value: "temp_value", Quoted: false, QuoteType: parser.NoQuote},
 			},
 			{
 				Name:  "EXISTING_VAR",
-				Value: &parser.Argument{Value: "new_value", Quoted: false},
+				Value: &parser.Argument{Value: "new_value", Quoted: false, QuoteType: parser.NoQuote},
 			},
 		},
 	}
@@ -198,11 +198,11 @@ func TestExecutor_ExecuteCommandWithGlobalVariableAssignment(t *testing.T) {
 	// Выполняем команду с временным присваиванием
 	command := &parser.Command{
 		Name: "echo",
-		Args: []*parser.Argument{{Value: "test", Quoted: false}},
+		Args: []*parser.Argument{{Value: "test", Quoted: false, QuoteType: parser.NoQuote}},
 		Assignments: []*parser.Assignment{
 			{
 				Name:  testVarName,
-				Value: &parser.Argument{Value: "temp_value", Quoted: false},
+				Value: &parser.Argument{Value: "temp_value", Quoted: false, QuoteType: parser.NoQuote},
 			},
 		},
 	}
@@ -257,7 +257,7 @@ func TestExecutor_ExecuteBuiltinWithEnvironment(t *testing.T) {
 		Assignments: []*parser.Assignment{
 			{
 				Name:  "TEMP_VAR",
-				Value: &parser.Argument{Value: "temp_value", Quoted: false},
+				Value: &parser.Argument{Value: "temp_value", Quoted: false, QuoteType: parser.NoQuote},
 			},
 		},
 	}
@@ -274,5 +274,68 @@ func TestExecutor_ExecuteBuiltinWithEnvironment(t *testing.T) {
 	// Проверяем, что временная переменная удалена после выполнения
 	if _, exists := executor.environment.Get("TEMP_VAR"); exists {
 		t.Error("TEMP_VAR should be removed after command execution")
+	}
+}
+
+// TestExecutor_ExecutePipelineWithThreeCommands тестирует выполнение пайплайна с тремя командами.
+// Проверяет корректную передачу данных через pipe между командами.
+func TestExecutor_ExecutePipelineWithThreeCommands(t *testing.T) {
+	executor := NewExecutor()
+
+	pipeline := &parser.Pipeline{
+		Commands: []*parser.Command{
+			{Name: "echo", Args: []*parser.Argument{{Value: "hello world", Quoted: false, QuoteType: parser.NoQuote}}},
+			{Name: "wc", Args: []*parser.Argument{}},
+			{Name: "wc", Args: []*parser.Argument{}},
+		},
+	}
+
+	err := executor.Execute(pipeline)
+	if err != nil {
+		t.Errorf("Executor.Execute() error = %v, expected no error", err)
+	}
+}
+
+// TestExecutor_ExecutePipelineWithAssignments тестирует выполнение пайплайна с присваиваниями переменных.
+// Проверяет, что переменные устанавливаются для каждой команды в пайплайне.
+func TestExecutor_ExecutePipelineWithAssignments(t *testing.T) {
+	executor := NewExecutor()
+
+	pipeline := &parser.Pipeline{
+		Commands: []*parser.Command{
+			{
+				Name: "echo",
+				Args: []*parser.Argument{{Value: "test", Quoted: false, QuoteType: parser.NoQuote}},
+				Assignments: []*parser.Assignment{
+					{
+						Name:  "VAR1",
+						Value: &parser.Argument{Value: "value1", Quoted: false, QuoteType: parser.NoQuote},
+					},
+				},
+			},
+			{
+				Name: "wc",
+				Args: []*parser.Argument{},
+				Assignments: []*parser.Assignment{
+					{
+						Name:  "VAR2",
+						Value: &parser.Argument{Value: "value2", Quoted: false, QuoteType: parser.NoQuote},
+					},
+				},
+			},
+		},
+	}
+
+	err := executor.Execute(pipeline)
+	if err != nil {
+		t.Errorf("Executor.Execute() error = %v, expected no error", err)
+	}
+
+	// Проверяем, что временные переменные удалены после выполнения
+	if _, exists := executor.environment.Get("VAR1"); exists {
+		t.Error("VAR1 should be removed after pipeline execution")
+	}
+	if _, exists := executor.environment.Get("VAR2"); exists {
+		t.Error("VAR2 should be removed after pipeline execution")
 	}
 }

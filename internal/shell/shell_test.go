@@ -137,7 +137,7 @@ func TestShell_ProcessCommandWithPipeline(t *testing.T) {
 		{
 			name:    "simple pipeline",
 			command: "echo hello | wc",
-			wantErr: true, // Pipeline execution not implemented in Phase 1
+			wantErr: false, // Pipeline execution now implemented
 		},
 		{
 			name:    "empty command before pipe",

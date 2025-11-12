@@ -2,6 +2,7 @@ package executor
 
 import (
 	"fmt"
+	"io"
 	"os"
 	osexec "os/exec"
 
@@ -40,21 +41,21 @@ func (exec *Executor) Execute(node parser.Node) error {
 	}
 }
 
-// executeCommand выполняет отдельную команду.
-// Устанавливает переменные окружения, определяет тип команды (встроенная/внешняя)
-// и вызывает соответствующий метод выполнения.
-func (exec *Executor) executeCommand(cmd *parser.Command) error {
-	// Сохраняем состояние переменных для восстановления после выполнения
-	type varState struct {
-		wasLocal  bool
-		oldValue  string
-		wasGlobal bool
-	}
+// varState хранит состояние переменной перед её изменением.
+// Используется для восстановления переменных после выполнения команды.
+type varState struct {
+	wasLocal  bool   // Была ли переменная в локальном окружении
+	oldValue  string // Старое значение (если была локальной)
+	wasGlobal bool   // Была ли переменная только в глобальном окружении
+}
+
+// saveAndSetVariables сохраняет текущее состояние переменных и устанавливает новые значения.
+// Возвращает map сохраненных состояний для последующего восстановления.
+func (exec *Executor) saveAndSetVariables(assignments []*parser.Assignment) map[string]varState {
 	savedVars := make(map[string]varState)
 
-	// Устанавливаем переменные окружения в локальном контексте
-	for _, assignment := range cmd.Assignments {
-		// Проверяем, существовала ли переменная в локальном окружении
+	for _, assignment := range assignments {
+		// Сохраняем текущее состояние переменной
 		if oldValue, exists := exec.environment.GetLocal(assignment.Name); exists {
 			savedVars[assignment.Name] = varState{
 				wasLocal:  true,
@@ -76,24 +77,40 @@ func (exec *Executor) executeCommand(cmd *parser.Command) error {
 				wasGlobal: false,
 			}
 		}
+		// Устанавливаем новое значение
 		exec.environment.Set(assignment.Name, assignment.Value.Value)
 	}
 
-	// Восстанавливаем переменные после выполнения команды
-	defer func() {
-		for name, state := range savedVars {
-			if state.wasLocal {
-				// Восстанавливаем старое локальное значение
-				exec.environment.Set(name, state.oldValue)
-			} else if state.wasGlobal {
-				// Удаляем локальную переменную, чтобы вернуться к глобальной
-				exec.environment.Unset(name)
-			} else {
-				// Переменная не существовала, удаляем её
-				exec.environment.Unset(name)
-			}
+	return savedVars
+}
+
+// restoreVariables восстанавливает сохраненное состояние переменных.
+// Используется для отката временных переменных после выполнения команды.
+func (exec *Executor) restoreVariables(savedVars map[string]varState) {
+	for name, state := range savedVars {
+		if state.wasLocal {
+			// Восстанавливаем старое локальное значение
+			exec.environment.Set(name, state.oldValue)
+		} else if state.wasGlobal {
+			// Удаляем локальную переменную, чтобы вернуться к глобальной
+			exec.environment.Unset(name)
+		} else {
+			// Переменная не существовала, удаляем её
+			exec.environment.Unset(name)
 		}
-	}()
+	}
+}
+
+// executeCommand выполняет отдельную команду.
+// Устанавливает переменные окружения, определяет тип команды (встроенная/внешняя)
+// и вызывает соответствующий метод выполнения.
+// Временные переменные из assignments автоматически восстанавливаются после выполнения.
+func (exec *Executor) executeCommand(cmd *parser.Command) error {
+	// Сохраняем и устанавливаем переменные окружения
+	savedVars := exec.saveAndSetVariables(cmd.Assignments)
+
+	// Восстанавливаем переменные после выполнения команды
+	defer exec.restoreVariables(savedVars)
 
 	args := make([]string, len(cmd.Args))
 	for i, arg := range cmd.Args {
@@ -108,18 +125,182 @@ func (exec *Executor) executeCommand(cmd *parser.Command) error {
 }
 
 // executePipeline выполняет пайплайн команд.
-// В Phase 1 поддерживается только одна команда в пайплайне.
-// В Phase 2 будет реализована полная поддержка пайплайнов.
+// Подключает stdout i-й команды к stdin (i+1)-й команды через pipe.
+//
+// Важно: команды выполняются параллельно (в отдельных goroutines), а не последовательно.
+// Это необходимо для правильной работы pipe - команды должны читать и писать одновременно.
+// Например, в пайплайне `echo hello | wc` команда `wc` должна начать читать данные
+// сразу после того, как `echo` начнет их писать, иначе pipe заблокируется.
+//
+// Возвращается код последней команды (как в POSIX shell).
+// Ошибки промежуточных команд не прерывают пайплайн, но сохраняются для диагностики.
 func (exec *Executor) executePipeline(pipeline *parser.Pipeline) error {
-	if len(pipeline.Commands) > 1 {
-		return fmt.Errorf("pipeline execution not implemented in Phase 1")
-	}
-
 	if len(pipeline.Commands) == 0 {
 		return fmt.Errorf("empty pipeline")
 	}
 
-	return exec.executeCommand(pipeline.Commands[0])
+	// Если команда одна, выполняем её без пайплайна
+	if len(pipeline.Commands) == 1 {
+		return exec.executeCommand(pipeline.Commands[0])
+	}
+
+	// Создаем pipes между командами
+	// Для N команд нужно N-1 pipe: между каждой парой соседних команд
+	pipes := make([]*io.PipeWriter, len(pipeline.Commands)-1)
+	readers := make([]io.Reader, len(pipeline.Commands))
+
+	// Первая команда читает из os.Stdin
+	readers[0] = os.Stdin
+
+	// Создаем pipes для промежуточных команд
+	// Каждый pipe соединяет stdout команды i с stdin команды i+1
+	for i := 0; i < len(pipeline.Commands)-1; i++ {
+		r, w := io.Pipe()
+		pipes[i] = w
+		readers[i+1] = r
+	}
+
+	// Запускаем все команды параллельно в goroutines
+	// Это критично для работы pipe - команды должны работать одновременно
+	errors := make(chan error, len(pipeline.Commands))
+
+	for i, cmd := range pipeline.Commands {
+		i := i // Захватываем переменную для замыкания в goroutine
+		cmd := cmd
+
+		go func() {
+			// Определяем stdout для команды
+			// Промежуточные команды пишут в pipe, последняя - в os.Stdout
+			var stdout io.Writer = os.Stdout
+			if i < len(pipeline.Commands)-1 {
+				stdout = pipes[i]
+			}
+
+			// Выполняем команду с правильными потоками ввода/вывода
+			err := exec.executeCommandInPipeline(cmd, readers[i], stdout, os.Stderr)
+
+			// Закрываем pipe после записи (если это не последняя команда)
+			// Это сигнализирует следующей команде, что данных больше не будет
+			if i < len(pipeline.Commands)-1 {
+				pipes[i].Close()
+			}
+
+			// Отправляем результат в канал ошибок
+			if err != nil {
+				errors <- fmt.Errorf("command %d (%s) failed: %w", i, cmd.Name, err)
+			} else {
+				errors <- nil
+			}
+		}()
+	}
+
+	// Ждем завершения всех команд и собираем ошибки
+	// В POSIX shell код возврата пайплайна равен коду последней команды
+	var lastErr error
+	for i := 0; i < len(pipeline.Commands); i++ {
+		if err := <-errors; err != nil {
+			// Сохраняем ошибку последней команды - она определяет код возврата пайплайна
+			if i == len(pipeline.Commands)-1 {
+				lastErr = err
+			}
+			// Ошибки промежуточных команд не прерывают пайплайн
+			// (в bash/zsh промежуточные ошибки игнорируются, если не установлен set -e)
+		}
+	}
+
+	return lastErr
+}
+
+// executeCommandInPipeline выполняет команду в контексте пайплайна.
+// stdin, stdout, stderr определяют потоки ввода/вывода для команды.
+// Временные переменные из assignments автоматически восстанавливаются после выполнения.
+func (exec *Executor) executeCommandInPipeline(
+	cmd *parser.Command,
+	stdin io.Reader,
+	stdout, stderr io.Writer,
+) error {
+	// Сохраняем и устанавливаем переменные окружения
+	savedVars := exec.saveAndSetVariables(cmd.Assignments)
+
+	// Восстанавливаем переменные после выполнения команды
+	defer exec.restoreVariables(savedVars)
+
+	args := make([]string, len(cmd.Args))
+	for j, arg := range cmd.Args {
+		args[j] = arg.Value
+	}
+
+	// Выполняем команду
+	if builtin, exists := exec.registry.Get(cmd.Name); exists {
+		return exec.executeBuiltinInPipeline(builtin, args, stdin, stdout, stderr)
+	}
+
+	return exec.executeExternalInPipeline(cmd.Name, args, stdin, stdout, stderr)
+}
+
+// executeBuiltinInPipeline выполняет встроенную команду в контексте пайплайна.
+func (exec *Executor) executeBuiltinInPipeline(
+	builtin builtins.Builtin,
+	args []string,
+	stdin io.Reader,
+	stdout, stderr io.Writer,
+) error {
+	env := exec.environment.GetAllMap()
+
+	// Создаем IO структуру с переданными потоками
+	io := &builtins.IO{
+		Stdin:  stdin,
+		Stdout: stdout,
+		Stderr: stderr,
+	}
+
+	exitCode := builtin.Execute(args, env, io.Stdin, io.Stdout, io.Stderr)
+
+	// Команда exit в пайплайне завершает весь процесс
+	// Это стандартное поведение для большинства shell
+	if exitCode != 0 {
+		return fmt.Errorf("command %s exited with code %d", builtin.Name(), exitCode)
+	}
+
+	return nil
+}
+
+// executeExternalInPipeline выполняет внешнюю программу в контексте пайплайна.
+func (exec *Executor) executeExternalInPipeline(
+	name string,
+	args []string,
+	stdin io.Reader,
+	stdout, stderr io.Writer,
+) error {
+	cmd := osexec.Command(name, args...)
+
+	// Устанавливаем потоки
+	if stdin != nil {
+		cmd.Stdin = stdin
+	} else {
+		cmd.Stdin = os.Stdin
+	}
+
+	if stdout != nil {
+		cmd.Stdout = stdout
+	} else {
+		cmd.Stdout = os.Stdout
+	}
+
+	if stderr != nil {
+		cmd.Stderr = stderr
+	} else {
+		cmd.Stderr = os.Stderr
+	}
+
+	cmd.Env = exec.environment.GetAll()
+
+	err := cmd.Run()
+	if err != nil {
+		return fmt.Errorf("external command failed: %w", err)
+	}
+
+	return nil
 }
 
 // executeBuiltin выполняет встроенную команду.
