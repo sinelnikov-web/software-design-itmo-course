@@ -22,6 +22,7 @@ func NewRegistry() *Registry {
 	registry.Register(NewWcCommand())
 	registry.Register(NewPwdCommand())
 	registry.Register(NewExitCommand())
+	registry.Register(NewGrepCommand())
 
 	return registry
 }

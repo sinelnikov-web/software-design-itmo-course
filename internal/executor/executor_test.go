@@ -33,12 +33,12 @@ func TestExecutor_IsBuiltin(t *testing.T) {
 }
 
 // TestExecutor_ListBuiltins тестирует получение списка всех встроенных команд.
-// Проверяет, что список содержит все ожидаемые команды (cat, echo, wc, pwd, exit).
+// Проверяет, что список содержит все ожидаемые команды (cat, echo, wc, pwd, exit, grep).
 func TestExecutor_ListBuiltins(t *testing.T) {
 	executor := NewExecutor()
 	commands := executor.ListBuiltins()
 
-	expectedCount := 5 // cat, echo, wc, pwd, exit
+	expectedCount := 6 // cat, echo, wc, pwd, exit, grep
 	if len(commands) != expectedCount {
 		t.Errorf("Executor.ListBuiltins() returned %d commands, expected %d", len(commands), expectedCount)
 	}

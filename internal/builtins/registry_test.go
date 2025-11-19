@@ -5,12 +5,12 @@ import (
 )
 
 // TestRegistry_Register тестирует регистрацию встроенных команд в реестре.
-// Проверяет, что все стандартные команды (cat, echo, wc, pwd, exit) зарегистрированы.
+// Проверяет, что все стандартные команды (cat, echo, wc, pwd, exit, grep) зарегистрированы.
 func TestRegistry_Register(t *testing.T) {
 	registry := NewRegistry()
 
 	// Проверяем, что все встроенные команды зарегистрированы
-	expectedCommands := []string{"cat", "echo", "wc", "pwd", "exit"}
+	expectedCommands := []string{"cat", "echo", "wc", "pwd", "exit", "grep"}
 
 	for _, cmdName := range expectedCommands {
 		if !registry.IsBuiltin(cmdName) {
@@ -77,13 +77,13 @@ func TestRegistry_List(t *testing.T) {
 	registry := NewRegistry()
 	commands := registry.List()
 
-	expectedCount := 5 // cat, echo, wc, pwd, exit
+	expectedCount := 6 // cat, echo, wc, pwd, exit, grep
 	if len(commands) != expectedCount {
 		t.Errorf("Registry.List() returned %d commands, expected %d", len(commands), expectedCount)
 	}
 
 	// Проверяем, что все ожидаемые команды присутствуют
-	expectedCommands := []string{"cat", "echo", "wc", "pwd", "exit"}
+	expectedCommands := []string{"cat", "echo", "wc", "pwd", "exit", "grep"}
 	for _, expected := range expectedCommands {
 		found := false
 		for _, cmd := range commands {
