@@ -94,6 +94,238 @@ sequenceDiagram
 
 ---
 
+### 4.2 Классы
+
+```mermaid
+classDiagram
+    %% Главная точка входа
+    class Main {
+        +main()
+    }
+
+    %% REPL компонент
+    class Shell {
+        -executor: Executor
+        -lexer: Lexer
+        -parser: Parser
+        -environment: Environment
+        +NewShell() Shell
+        +Run() error
+        -processCommand(line string) error
+    }
+
+    %% Лексический анализатор
+    class Lexer {
+        +NewLexer() Lexer
+        +Tokenize(input string) ([]Token, error)
+        -isValidVariableName(name string) bool
+    }
+
+    class Token {
+        +Type: TokenType
+        +Value: string
+        +String() string
+    }
+
+    class TokenType {
+        <<enumeration>>
+        WORD
+        PIPE
+        SQUOTE
+        DQUOTE
+        ASSIGN
+    }
+
+    %% Синтаксический анализатор
+    class Parser {
+        +NewParser() Parser
+        +Parse(tokens []Token) (Node, error)
+        -parsePipeline(tokens []Token) ([]*Command, error)
+        -parseCommand(tokens []Token) (*Command, error)
+        -createArgument(token Token) *Argument
+    }
+
+    %% AST узлы
+    class Node {
+        <<interface>>
+        +String() string
+        +Type() NodeType
+    }
+
+    class NodeType {
+        <<enumeration>>
+        CommandNode
+        PipelineNode
+        AssignmentNode
+        ArgumentNode
+    }
+
+    class Command {
+        +Name: string
+        +Args: []*Argument
+        +Assignments: []*Assignment
+        +String() string
+        +Type() NodeType
+    }
+
+    class Pipeline {
+        +Commands: []*Command
+        +String() string
+        +Type() NodeType
+    }
+
+    class Assignment {
+        +Name: string
+        +Value: *Argument
+        +String() string
+        +Type() NodeType
+    }
+
+    class Argument {
+        +Value: string
+        +Quoted: bool
+        +String() string
+        +Type() NodeType
+    }
+
+    %% Исполнитель команд
+    class Executor {
+        -registry: Registry
+        -environment: Environment
+        +NewExecutor() Executor
+        +Execute(node Node) error
+        +IsBuiltin(name string) bool
+        +ListBuiltins() []string
+        +SetEnvironment(env Environment)
+        -executeCommand(cmd *Command) error
+        -executePipeline(pipeline *Pipeline) error
+        -executeBuiltin(builtin Builtin, args []string) error
+        -executeExternal(name string, args []string) error
+    }
+
+    %% Реестр встроенных команд
+    class Registry {
+        -commands: map[string]Builtin
+        +NewRegistry() Registry
+        +Register(command Builtin)
+        +Get(name string) (Builtin, bool)
+        +List() []string
+        +IsBuiltin(name string) bool
+        +String() string
+    }
+
+    %% Интерфейс встроенных команд
+    class Builtin {
+        <<interface>>
+        +Execute(args []string, env map[string]string, stdin Reader, stdout Writer, stderr Writer) int
+        +Name() string
+    }
+
+    class IO {
+        +Stdin: Reader
+        +Stdout: Writer
+        +Stderr: Writer
+        +NewIO() IO
+    }
+
+    %% Встроенные команды
+    class CatCommand {
+        +Name() string
+        +Execute(...) int
+        -processFile(filename string, stdout Writer, stderr Writer) int
+    }
+
+    class EchoCommand {
+        +Name() string
+        +Execute(...) int
+    }
+
+    class WcCommand {
+        +Name() string
+        +Execute(...) int
+        -count(input Reader) (int, int, int)
+    }
+
+    class PwdCommand {
+        +Name() string
+        +Execute(...) int
+    }
+
+    class ExitCommand {
+        +Name() string
+        +Execute(...) int
+    }
+
+    %% Управление окружением
+    class Environment {
+        -global: map[string]string
+        -local: map[string]string
+        +NewEnvironment() Environment
+        +Set(name string, value string)
+        +Get(name string) (string, bool)
+        +GetAll() []string
+        +Unset(name string)
+        +ClearLocal()
+        +ListLocal() map[string]string
+        +ListGlobal() map[string]string
+    }
+
+    %% Связи между компонентами
+    Main --> Shell: создает
+    
+    Shell --> Lexer: использует
+    Shell --> Parser: использует
+    Shell --> Executor: использует
+    Shell --> Environment: управляет
+    
+    Lexer --> Token: создает
+    Token --> TokenType: использует
+    
+    Parser --> Token: принимает
+    Parser --> Node: создает
+    Parser --> Command: создает
+    Parser --> Pipeline: создает
+    Parser --> Argument: создает
+    Parser --> Assignment: создает
+    
+    Node <|.. Command: реализует
+    Node <|.. Pipeline: реализует
+    Node <|.. Assignment: реализует
+    Node <|.. Argument: реализует
+    Command --> NodeType: использует
+    Pipeline --> NodeType: использует
+    Assignment --> NodeType: использует
+    Argument --> NodeType: использует
+    
+    Pipeline --> Command: содержит
+    Command --> Argument: содержит
+    Command --> Assignment: содержит
+    Assignment --> Argument: содержит
+    
+    Executor --> Registry: использует
+    Executor --> Environment: использует
+    Executor --> Node: выполняет
+    Executor --> Command: выполняет
+    Executor --> Pipeline: выполняет
+    Executor --> Builtin: вызывает
+    Executor --> IO: создает
+    
+    Registry --> Builtin: управляет
+    Registry --> CatCommand: регистрирует
+    Registry --> EchoCommand: регистрирует
+    Registry --> WcCommand: регистрирует
+    Registry --> PwdCommand: регистрирует
+    Registry --> ExitCommand: регистрирует
+    
+    Builtin <|.. CatCommand: реализует
+    Builtin <|.. EchoCommand: реализует
+    Builtin <|.. WcCommand: реализует
+    Builtin <|.. PwdCommand: реализует
+    Builtin <|.. ExitCommand: реализует
+    
+    Environment ..> Main: системное окружение
+```
+
 ## 5. Правила лексинга и парсинга
 
 ### 5.1 Лексер
