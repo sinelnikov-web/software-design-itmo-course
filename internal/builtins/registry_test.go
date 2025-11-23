@@ -4,6 +4,8 @@ import (
 	"testing"
 )
 
+// TestRegistry_Register тестирует регистрацию встроенных команд в реестре.
+// Проверяет, что все стандартные команды (cat, echo, wc, pwd, exit) зарегистрированы.
 func TestRegistry_Register(t *testing.T) {
 	registry := NewRegistry()
 
@@ -17,6 +19,8 @@ func TestRegistry_Register(t *testing.T) {
 	}
 }
 
+// TestRegistry_Get тестирует получение команды из реестра по имени.
+// Проверяет корректность работы для существующих и несуществующих команд.
 func TestRegistry_Get(t *testing.T) {
 	registry := NewRegistry()
 
@@ -41,6 +45,8 @@ func TestRegistry_Get(t *testing.T) {
 	}
 }
 
+// TestRegistry_IsBuiltin тестирует проверку, является ли команда встроенной.
+// Проверяет корректность определения встроенных и внешних команд.
 func TestRegistry_IsBuiltin(t *testing.T) {
 	registry := NewRegistry()
 
@@ -65,6 +71,8 @@ func TestRegistry_IsBuiltin(t *testing.T) {
 	}
 }
 
+// TestRegistry_List тестирует получение списка всех зарегистрированных команд.
+// Проверяет, что список содержит все ожидаемые встроенные команды.
 func TestRegistry_List(t *testing.T) {
 	registry := NewRegistry()
 	commands := registry.List()

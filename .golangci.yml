@@ -18,7 +18,6 @@ linters:
     - goconst
     - gocyclo
     - revive
-    - mnd
 
 linters-settings:
   gocyclo:

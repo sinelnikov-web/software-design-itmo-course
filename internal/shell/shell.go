@@ -8,17 +8,20 @@ import (
 
 	"gocli/internal/environment"
 	"gocli/internal/executor"
+	"gocli/internal/expander"
 	"gocli/internal/lexer"
 	"gocli/internal/parser"
 )
 
 // Shell представляет основную структуру командной оболочки.
 // Содержит все необходимые компоненты для обработки пользовательского ввода:
-// лексер для токенизации, парсер для построения AST и исполнитель для выполнения команд.
+// лексер для токенизации, парсер для построения AST, expander для подстановок
+// и исполнитель для выполнения команд.
 type Shell struct {
 	executor    *executor.Executor       // Исполнитель команд (встроенные и внешние)
 	lexer       *lexer.Lexer             // Лексер для разбора командной строки на токены
 	parser      *parser.Parser           // Парсер для построения абстрактного синтаксического дерева
+	expander    *expander.Expander       // Expander для подстановки переменных
 	environment *environment.Environment // Управление переменными окружения
 }
 
@@ -28,11 +31,13 @@ func NewShell() *Shell {
 	exec := executor.NewExecutor()
 	env := environment.NewEnvironment()
 	exec.SetEnvironment(env)
+	exp := expander.NewExpander(env)
 
 	return &Shell{
 		executor:    exec,
 		lexer:       lexer.NewLexer(),
 		parser:      parser.NewParser(),
+		expander:    exp,
 		environment: env,
 	}
 }
@@ -63,6 +68,9 @@ func (s *Shell) Run() error {
 	return scanner.Err()
 }
 
+// processCommand обрабатывает одну команду пользователя.
+// Выполняет полный цикл обработки: токенизация → парсинг → подстановка переменных → выполнение.
+// Возвращает ошибку при любой ошибке на этапах обработки или выполнения.
 func (s *Shell) processCommand(line string) error {
 	tokens, err := s.lexer.Tokenize(line)
 	if err != nil {
@@ -74,5 +82,11 @@ func (s *Shell) processCommand(line string) error {
 		return fmt.Errorf("parsing failed: %w", err)
 	}
 
-	return s.executor.Execute(ast)
+	// Выполняем подстановку переменных
+	expandedAST, err := s.expander.Expand(ast)
+	if err != nil {
+		return fmt.Errorf("variable expansion failed: %w", err)
+	}
+
+	return s.executor.Execute(expandedAST)
 }

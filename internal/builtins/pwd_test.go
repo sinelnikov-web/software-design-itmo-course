@@ -7,6 +7,8 @@ import (
 	"testing"
 )
 
+// TestPwdCommand_Execute тестирует выполнение команды pwd без аргументов.
+// Проверяет, что команда возвращает текущую рабочую директорию.
 func TestPwdCommand_Execute(t *testing.T) {
 	command := NewPwdCommand()
 
@@ -27,6 +29,8 @@ func TestPwdCommand_Execute(t *testing.T) {
 	}
 }
 
+// TestPwdCommand_Name тестирует получение имени команды pwd.
+// Проверяет, что команда возвращает корректное имя "pwd".
 func TestPwdCommand_Name(t *testing.T) {
 	command := NewPwdCommand()
 	expected := "pwd"
@@ -36,6 +40,8 @@ func TestPwdCommand_Name(t *testing.T) {
 	}
 }
 
+// TestPwdCommand_ExecuteWithArgs тестирует выполнение команды pwd с аргументами.
+// Проверяет, что команда игнорирует аргументы и все равно возвращает текущую директорию.
 func TestPwdCommand_ExecuteWithArgs(t *testing.T) {
 	command := NewPwdCommand()
 
