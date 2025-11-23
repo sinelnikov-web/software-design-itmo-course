@@ -264,9 +264,9 @@ func TestShell_StandaloneAssignments(t *testing.T) {
 			checkValue: "test value",
 		},
 		{
-			name:    "assignment with variable substitution",
-			command: `X=foo Y=$X`,
-			wantErr: false,
+			name:       "assignment with variable substitution",
+			command:    `X=foo Y=$X`,
+			wantErr:    false,
 			checkVar:   "Y",
 			checkValue: "foo",
 		},
@@ -285,7 +285,7 @@ func TestShell_StandaloneAssignments(t *testing.T) {
 				if !exists {
 					t.Errorf("Variable %s was not set after command %q", tt.checkVar, tt.command)
 				} else if value != tt.checkValue {
-					t.Errorf("Variable %s = %q, expected %q after command %q", 
+					t.Errorf("Variable %s = %q, expected %q after command %q",
 						tt.checkVar, value, tt.checkValue, tt.command)
 				}
 			}
