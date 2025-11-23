@@ -104,8 +104,18 @@ func (exec *Executor) restoreVariables(savedVars map[string]varState) {
 // executeCommand выполняет отдельную команду.
 // Устанавливает переменные окружения, определяет тип команды (встроенная/внешняя)
 // и вызывает соответствующий метод выполнения.
-// Временные переменные из assignments автоматически восстанавливаются после выполнения.
+// Временные переменные из assignments автоматически восстанавливаются после выполнения,
+// если команда выполняется. Если команда состоит только из assignments, переменные сохраняются.
 func (exec *Executor) executeCommand(cmd *parser.Command) error {
+	// Если команда состоит только из assignments (например, x=5),
+	// сохраняем переменные навсегда, не восстанавливаем их
+	if cmd.Name == "" {
+		for _, assignment := range cmd.Assignments {
+			exec.environment.Set(assignment.Name, assignment.Value.Value)
+		}
+		return nil
+	}
+
 	// Сохраняем и устанавливаем переменные окружения
 	savedVars := exec.saveAndSetVariables(cmd.Assignments)
 

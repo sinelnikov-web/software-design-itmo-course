@@ -95,8 +95,10 @@ func (p *Parser) parseCommand(tokens []lexer.Token) (*Command, error) {
 		}
 	}
 
-	if command.Name == "" {
-		return nil, fmt.Errorf("command name is required")
+	// Команда может состоять только из assignments (например, x=5)
+	// или должна иметь имя команды (например, x=5 echo hello)
+	if command.Name == "" && len(command.Assignments) == 0 {
+		return nil, fmt.Errorf("command name or assignment is required")
 	}
 
 	return command, nil
