@@ -213,9 +213,9 @@ func TestShell_ProcessCommandParsingErrors(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name:    "assignment without value",
-			command: "VAR= echo",
-			wantErr: true,
+			name:    "standalone assignment (VAR=value syntax)",
+			command: "VAR=test",
+			wantErr: false,
 		},
 	}
 
@@ -225,6 +225,69 @@ func TestShell_ProcessCommandParsingErrors(t *testing.T) {
 
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Shell.processCommand(%q) error = %v, wantErr %v", tt.command, err, tt.wantErr)
+			}
+		})
+	}
+}
+
+// TestShell_StandaloneAssignments тестирует новую функциональность standalone assignments.
+// Проверяет, что переменные могут быть установлены без выполнения команды.
+func TestShell_StandaloneAssignments(t *testing.T) {
+	sh := NewShell()
+
+	tests := []struct {
+		name       string
+		command    string
+		wantErr    bool
+		checkVar   string
+		checkValue string
+	}{
+		{
+			name:       "simple standalone assignment",
+			command:    "VAR=value",
+			wantErr:    false,
+			checkVar:   "VAR",
+			checkValue: "value",
+		},
+		{
+			name:       "standalone assignment with quoted value",
+			command:    `VAR="hello world"`,
+			wantErr:    false,
+			checkVar:   "VAR",
+			checkValue: "hello world",
+		},
+		{
+			name:       "standalone assignment with single quotes",
+			command:    `VAR='test value'`,
+			wantErr:    false,
+			checkVar:   "VAR",
+			checkValue: "test value",
+		},
+		{
+			name:    "assignment with variable substitution",
+			command: `X=foo Y=$X`,
+			wantErr: false,
+			checkVar:   "Y",
+			checkValue: "foo",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			err := sh.processCommand(tt.command)
+
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Shell.processCommand(%q) error = %v, wantErr %v", tt.command, err, tt.wantErr)
+			}
+
+			if !tt.wantErr && tt.checkVar != "" {
+				value, exists := sh.environment.Get(tt.checkVar)
+				if !exists {
+					t.Errorf("Variable %s was not set after command %q", tt.checkVar, tt.command)
+				} else if value != tt.checkValue {
+					t.Errorf("Variable %s = %q, expected %q after command %q", 
+						tt.checkVar, value, tt.checkValue, tt.command)
+				}
 			}
 		})
 	}
