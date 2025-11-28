@@ -49,6 +49,16 @@ func TestShell_ProcessCommand(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name:    "grep command",
+			command: "echo test | grep test",
+			wantErr: false,
+		},
+		{
+			name:    "grep with flags",
+			command: "echo test testing | grep -w test",
+			wantErr: false,
+		},
+		{
 			name:    "command with quotes",
 			command: `echo "hello world"`,
 			wantErr: false,
@@ -102,6 +112,11 @@ func TestShell_ProcessCommandWithAssignment(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name:    "grep with variable assignment",
+			command: "PATTERN=test echo test | grep $PATTERN",
+			wantErr: false,
+		},
+		{
 			name:    "multiple assignments",
 			command: "VAR1=value1 VAR2=value2 echo test",
 			wantErr: false,
@@ -138,6 +153,26 @@ func TestShell_ProcessCommandWithPipeline(t *testing.T) {
 			name:    "simple pipeline",
 			command: "echo hello | wc",
 			wantErr: false, // Pipeline execution now implemented
+		},
+		{
+			name:    "pipeline with grep",
+			command: "echo hello world | grep hello",
+			wantErr: false,
+		},
+		{
+			name:    "pipeline with grep -w",
+			command: "echo test testing | grep -w test",
+			wantErr: false,
+		},
+		{
+			name:    "pipeline with grep -i",
+			command: "echo Hello WORLD | grep -i world",
+			wantErr: false,
+		},
+		{
+			name:    "three commands with grep",
+			command: "echo line1 line2 | grep line | wc",
+			wantErr: false,
 		},
 		{
 			name:    "empty command before pipe",
