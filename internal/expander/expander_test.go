@@ -12,6 +12,7 @@ const (
 	testVarName = "$VAR"
 	testExit    = "exit"
 	testTxtFile = "test.txt"
+	testPattern = "test"
 )
 
 // TestExpander_ExpandVariable проверяет базовую подстановку переменных.
@@ -440,5 +441,151 @@ func TestExpander_ExpandUnclosedBraces(t *testing.T) {
 	_, err := exp.expandArgument(arg)
 	if err == nil {
 		t.Error("expected error for unclosed ${ variable")
+	}
+}
+
+// TestExpander_ExpandPipelineWithGrep проверяет подстановку переменных в пайплайне с grep.
+func TestExpander_ExpandPipelineWithGrep(t *testing.T) {
+	env := environment.NewEnvironment()
+	env.Set("PATTERN", "test")
+	env.Set("FILE", "test.txt")
+	exp := NewExpander(env)
+
+	pipeline := &parser.Pipeline{
+		Commands: []*parser.Command{
+			{
+				Name: "cat",
+				Args: []*parser.Argument{
+					{
+						Value:     "$FILE",
+						Quoted:    false,
+						QuoteType: parser.NoQuote,
+					},
+				},
+			},
+			{
+				Name: "grep",
+				Args: []*parser.Argument{
+					{
+						Value:     "$PATTERN",
+						Quoted:    false,
+						QuoteType: parser.NoQuote,
+					},
+				},
+			},
+		},
+	}
+
+	expanded, err := exp.Expand(pipeline)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	expandedPipeline, ok := expanded.(*parser.Pipeline)
+	if !ok {
+		t.Fatalf("expected *parser.Pipeline, got %T", expanded)
+	}
+
+	if len(expandedPipeline.Commands) != 2 {
+		t.Fatalf("expected 2 commands, got %d", len(expandedPipeline.Commands))
+	}
+
+	if expandedPipeline.Commands[0].Args[0].Value != testTxtFile {
+		t.Errorf("expected arg '%s', got '%s'", testTxtFile, expandedPipeline.Commands[0].Args[0].Value)
+	}
+
+	if expandedPipeline.Commands[1].Args[0].Value != testPattern {
+		t.Errorf("expected grep pattern '%s', got '%s'", testPattern, expandedPipeline.Commands[1].Args[0].Value)
+	}
+}
+
+// TestExpander_ExpandGrepWithFlags проверяет подстановку переменных в grep с флагами.
+func TestExpander_ExpandGrepWithFlags(t *testing.T) {
+	env := environment.NewEnvironment()
+	env.Set("PATTERN", "go")
+	exp := NewExpander(env)
+
+	cmd := &parser.Command{
+		Name: "grep",
+		Args: []*parser.Argument{
+			{
+				Value:     "-w",
+				Quoted:    false,
+				QuoteType: parser.NoQuote,
+			},
+			{
+				Value:     "$PATTERN",
+				Quoted:    false,
+				QuoteType: parser.NoQuote,
+			},
+		},
+	}
+
+	expanded, err := exp.Expand(cmd)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	expandedCmd, ok := expanded.(*parser.Command)
+	if !ok {
+		t.Fatalf("expected *parser.Command, got %T", expanded)
+	}
+
+	if len(expandedCmd.Args) != 2 {
+		t.Fatalf("expected 2 args, got %d", len(expandedCmd.Args))
+	}
+
+	if expandedCmd.Args[0].Value != "-w" {
+		t.Errorf("expected flag '-w', got '%s'", expandedCmd.Args[0].Value)
+	}
+
+	if expandedCmd.Args[1].Value != "go" {
+		t.Errorf("expected pattern 'go', got '%s'", expandedCmd.Args[1].Value)
+	}
+}
+
+// TestExpander_ExpandGrepWithAssignment проверяет подстановку переменных в grep с присваиванием.
+func TestExpander_ExpandGrepWithAssignment(t *testing.T) {
+	env := environment.NewEnvironment()
+	env.Set("BASE", "test")
+	exp := NewExpander(env)
+
+	cmd := &parser.Command{
+		Name: "grep",
+		Args: []*parser.Argument{
+			{
+				Value:     "$BASE",
+				Quoted:    false,
+				QuoteType: parser.NoQuote,
+			},
+		},
+		Assignments: []*parser.Assignment{
+			{
+				Name: "PATTERN",
+				Value: &parser.Argument{
+					Value:     "$BASE",
+					Quoted:    false,
+					QuoteType: parser.NoQuote,
+				},
+			},
+		},
+	}
+
+	expanded, err := exp.Expand(cmd)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	expandedCmd, ok := expanded.(*parser.Command)
+	if !ok {
+		t.Fatalf("expected *parser.Command, got %T", expanded)
+	}
+
+	if expandedCmd.Args[0].Value != testPattern {
+		t.Errorf("expected arg '%s', got '%s'", testPattern, expandedCmd.Args[0].Value)
+	}
+
+	if expandedCmd.Assignments[0].Value.Value != testPattern {
+		t.Errorf("expected assignment value '%s', got '%s'", testPattern, expandedCmd.Assignments[0].Value.Value)
 	}
 }
