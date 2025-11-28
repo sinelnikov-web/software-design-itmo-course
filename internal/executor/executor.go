@@ -268,6 +268,13 @@ func (exec *Executor) executeBuiltinInPipeline(
 
 	// Команда exit в пайплайне завершает весь процесс
 	// Это стандартное поведение для большинства shell
+
+	// Специальная обработка для grep: код 1 = не найдено (не ошибка)
+	if builtin.Name() == builtins.GrepCommandName && exitCode == 1 {
+		// Код 1 для grep означает "не найдено совпадений" - это нормальное состояние, не ошибка
+		return nil
+	}
+
 	if exitCode != 0 {
 		return fmt.Errorf("command %s exited with code %d", builtin.Name(), exitCode)
 	}
@@ -320,6 +327,9 @@ func (exec *Executor) executeExternalInPipeline(
 //
 // Примечание: команда exit вызывает os.Exit(), который завершает процесс,
 // поэтому код после вызова Execute для exit никогда не выполняется.
+//
+// Специальная обработка для grep: код возврата 1 означает "не найдено совпадений",
+// что не является ошибкой, поэтому для grep код 1 не возвращается как ошибка.
 func (exec *Executor) executeBuiltin(builtin builtins.Builtin, args []string) error {
 	io := builtins.NewIO()
 	env := exec.environment.GetAllMap()
@@ -328,6 +338,13 @@ func (exec *Executor) executeBuiltin(builtin builtins.Builtin, args []string) er
 
 	// Если команда exit была вызвана, os.Exit() уже завершил процесс,
 	// поэтому этот код не выполнится для exit
+
+	// Специальная обработка для grep: код 1 = не найдено (не ошибка)
+	if builtin.Name() == builtins.GrepCommandName && exitCode == 1 {
+		// Код 1 для grep означает "не найдено совпадений" - это нормальное состояние, не ошибка
+		return nil
+	}
+
 	if exitCode != 0 {
 		return fmt.Errorf("command %s exited with code %d", builtin.Name(), exitCode)
 	}

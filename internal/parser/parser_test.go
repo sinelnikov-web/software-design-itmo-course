@@ -77,6 +77,90 @@ func TestParser_Parse(t *testing.T) {
 			expected: nil,
 			wantErr:  true,
 		},
+		{
+			name: "grep command",
+			tokens: []lexer.Token{
+				{Type: lexer.WORD, Value: "grep"},
+				{Type: lexer.WORD, Value: "pattern"},
+			},
+			expected: &Command{
+				Name: "grep",
+				Args: []*Argument{{Value: "pattern", Quoted: false}},
+			},
+			wantErr: false,
+		},
+		{
+			name: "grep with flag -w",
+			tokens: []lexer.Token{
+				{Type: lexer.WORD, Value: "grep"},
+				{Type: lexer.WORD, Value: "-w"},
+				{Type: lexer.WORD, Value: "pattern"},
+			},
+			expected: &Command{
+				Name: "grep",
+				Args: []*Argument{
+					{Value: "-w", Quoted: false},
+					{Value: "pattern", Quoted: false},
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "grep with multiple flags",
+			tokens: []lexer.Token{
+				{Type: lexer.WORD, Value: "grep"},
+				{Type: lexer.WORD, Value: "-i"},
+				{Type: lexer.WORD, Value: "-w"},
+				{Type: lexer.WORD, Value: "pattern"},
+			},
+			expected: &Command{
+				Name: "grep",
+				Args: []*Argument{
+					{Value: "-i", Quoted: false},
+					{Value: "-w", Quoted: false},
+					{Value: "pattern", Quoted: false},
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "pipeline with grep",
+			tokens: []lexer.Token{
+				{Type: lexer.WORD, Value: "echo"},
+				{Type: lexer.WORD, Value: "hello"},
+				{Type: lexer.PIPE, Value: "|"},
+				{Type: lexer.WORD, Value: "grep"},
+				{Type: lexer.WORD, Value: "hello"},
+			},
+			expected: &Pipeline{
+				Commands: []*Command{
+					{Name: "echo", Args: []*Argument{{Value: "hello", Quoted: false}}},
+					{Name: "grep", Args: []*Argument{{Value: "hello", Quoted: false}}},
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "pipeline with grep and flags",
+			tokens: []lexer.Token{
+				{Type: lexer.WORD, Value: "cat"},
+				{Type: lexer.WORD, Value: "file"},
+				{Type: lexer.PIPE, Value: "|"},
+				{Type: lexer.WORD, Value: "grep"},
+				{Type: lexer.WORD, Value: "-w"},
+				{Type: lexer.WORD, Value: "pattern"},
+			},
+			expected: &Pipeline{
+				Commands: []*Command{
+					{Name: "cat", Args: []*Argument{{Value: "file", Quoted: false}}},
+					{Name: "grep", Args: []*Argument{
+						{Value: "-w", Quoted: false},
+						{Value: "pattern", Quoted: false},
+					}},
+				},
+			},
+			wantErr: false,
+		},
 	}
 
 	parser := NewParser()

@@ -18,6 +18,7 @@ func TestExecutor_IsBuiltin(t *testing.T) {
 	}{
 		{"builtin command", "echo", true},
 		{"builtin command", "cat", true},
+		{"builtin command", "grep", true},
 		{"non-builtin command", "ls", false},
 		{"empty command", "", false},
 	}
@@ -33,12 +34,12 @@ func TestExecutor_IsBuiltin(t *testing.T) {
 }
 
 // TestExecutor_ListBuiltins тестирует получение списка всех встроенных команд.
-// Проверяет, что список содержит все ожидаемые команды (cat, echo, wc, pwd, exit).
+// Проверяет, что список содержит все ожидаемые команды (cat, echo, wc, pwd, exit, grep).
 func TestExecutor_ListBuiltins(t *testing.T) {
 	executor := NewExecutor()
 	commands := executor.ListBuiltins()
 
-	expectedCount := 5 // cat, echo, wc, pwd, exit
+	expectedCount := 6 // cat, echo, wc, pwd, exit, grep
 	if len(commands) != expectedCount {
 		t.Errorf("Executor.ListBuiltins() returned %d commands, expected %d", len(commands), expectedCount)
 	}
@@ -67,6 +68,14 @@ func TestExecutor_ExecuteCommand(t *testing.T) {
 			command: &parser.Command{
 				Name: "pwd",
 				Args: []*parser.Argument{},
+			},
+			wantErr: false,
+		},
+		{
+			name: "grep command",
+			command: &parser.Command{
+				Name: "grep",
+				Args: []*parser.Argument{{Value: "test", Quoted: false, QuoteType: parser.NoQuote}},
 			},
 			wantErr: false,
 		},
@@ -337,5 +346,68 @@ func TestExecutor_ExecutePipelineWithAssignments(t *testing.T) {
 	}
 	if _, exists := executor.environment.Get("VAR2"); exists {
 		t.Error("VAR2 should be removed after pipeline execution")
+	}
+}
+
+// TestExecutor_ExecutePipelineWithGrep тестирует выполнение пайплайна с grep.
+// Проверяет, что grep корректно работает в пайплайнах.
+func TestExecutor_ExecutePipelineWithGrep(t *testing.T) {
+	executor := NewExecutor()
+
+	tests := []struct {
+		name     string
+		pipeline *parser.Pipeline
+		wantErr  bool
+	}{
+		{
+			name: "cat with grep",
+			pipeline: &parser.Pipeline{
+				Commands: []*parser.Command{
+					{Name: "echo", Args: []*parser.Argument{{Value: "hello\ngoodbye\nworld", Quoted: false, QuoteType: parser.NoQuote}}},
+					{Name: "grep", Args: []*parser.Argument{{Value: "hello", Quoted: false, QuoteType: parser.NoQuote}}},
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "echo with grep -w",
+			pipeline: &parser.Pipeline{
+				Commands: []*parser.Command{
+					{Name: "echo", Args: []*parser.Argument{{Value: "test\ntesting\ntest case", Quoted: false, QuoteType: parser.NoQuote}}},
+					{Name: "grep", Args: []*parser.Argument{{Value: "-w", Quoted: false, QuoteType: parser.NoQuote}, {Value: "test", Quoted: false, QuoteType: parser.NoQuote}}},
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "echo with grep -i",
+			pipeline: &parser.Pipeline{
+				Commands: []*parser.Command{
+					{Name: "echo", Args: []*parser.Argument{{Value: "Hello\nWORLD\nhello", Quoted: false, QuoteType: parser.NoQuote}}},
+					{Name: "grep", Args: []*parser.Argument{{Value: "-i", Quoted: false, QuoteType: parser.NoQuote}, {Value: "world", Quoted: false, QuoteType: parser.NoQuote}}},
+				},
+			},
+			wantErr: false,
+		},
+		{
+			name: "three commands with grep",
+			pipeline: &parser.Pipeline{
+				Commands: []*parser.Command{
+					{Name: "echo", Args: []*parser.Argument{{Value: "line1\nline2\nline3", Quoted: false, QuoteType: parser.NoQuote}}},
+					{Name: "grep", Args: []*parser.Argument{{Value: "line", Quoted: false, QuoteType: parser.NoQuote}}},
+					{Name: "wc", Args: []*parser.Argument{}},
+				},
+			},
+			wantErr: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			err := executor.Execute(tt.pipeline)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Executor.Execute() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
 	}
 }

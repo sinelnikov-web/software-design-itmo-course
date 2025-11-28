@@ -11,7 +11,7 @@
 
 Спроектировать минималистичный, расширяемый интерпретатор командной строки (CLI Shell), поддерживающий:
 
-* **Команды (builtins):** `cat`, `echo`, `wc`, `pwd`, `exit`.
+* **Команды (builtins):** `cat`, `echo`, `wc`, `pwd`, `exit`, `grep`.
 * **Кавычки:** одинарные (full) и двойные (weak) quoting.
 * **Окружение:** присваивания `name=value`, подстановки через `$NAME`.
 * **Вызов внешних программ**, если команда не является встроенной.
@@ -188,6 +188,17 @@ classDiagram
         +Type() NodeType
     }
 
+    %% Подстановка переменных
+    class Expander {
+        -environment: Environment
+        +NewExpander(env Environment) Expander
+        +Expand(node Node) (Node, error)
+        -expandCommand(cmd *Command) (*Command, error)
+        -expandPipeline(pipeline *Pipeline) (*Pipeline, error)
+        -expandArgument(arg *Argument) (*Argument, error)
+        -expandString(s string) (string, error)
+    }
+
     %% Исполнитель команд
     class Executor {
         -registry: Registry
@@ -256,6 +267,12 @@ classDiagram
         +Execute(...) int
     }
 
+    class GrepCommand {
+        +Name() string
+        +Execute(...) int
+        -searchInReader(reader Reader, re *Regexp, afterContext int, stdout Writer, stderr Writer, filename string) int
+    }
+
     %% Управление окружением
     class Environment {
         -global: map[string]string
@@ -275,6 +292,7 @@ classDiagram
     
     Shell --> Lexer: использует
     Shell --> Parser: использует
+    Shell --> Expander: использует
     Shell --> Executor: использует
     Shell --> Environment: управляет
     
@@ -287,6 +305,12 @@ classDiagram
     Parser --> Pipeline: создает
     Parser --> Argument: создает
     Parser --> Assignment: создает
+    
+    Expander --> Node: принимает
+    Expander --> Command: обрабатывает
+    Expander --> Pipeline: обрабатывает
+    Expander --> Argument: обрабатывает
+    Expander --> Environment: использует
     
     Node <|.. Command: реализует
     Node <|.. Pipeline: реализует
@@ -305,6 +329,7 @@ classDiagram
     Executor --> Registry: использует
     Executor --> Environment: использует
     Executor --> Node: выполняет
+    Executor --> Expander: использует (опционально)
     Executor --> Command: выполняет
     Executor --> Pipeline: выполняет
     Executor --> Builtin: вызывает
@@ -316,12 +341,14 @@ classDiagram
     Registry --> WcCommand: регистрирует
     Registry --> PwdCommand: регистрирует
     Registry --> ExitCommand: регистрирует
+    Registry --> GrepCommand: регистрирует
     
     Builtin <|.. CatCommand: реализует
     Builtin <|.. EchoCommand: реализует
     Builtin <|.. WcCommand: реализует
     Builtin <|.. PwdCommand: реализует
     Builtin <|.. ExitCommand: реализует
+    Builtin <|.. GrepCommand: реализует
     
     Environment ..> Main: системное окружение
 ```
@@ -415,7 +442,7 @@ interface Environment {
 
 * Реализовать: REPL → Lexer → Parser → Executor → Builtins Registry → Environment (минимально, для внешних команд) → IO.
 * Поддерживаемые фичи: одиночная команда **без** `$VAR`, **без** `|`. Кавычки допускаются, но трактуются как група слов (без expand логики).
-* Builtins: `cat`, `echo`, `wc`, `pwd`, `exit`.
+* Builtins: `cat`, `echo`, `wc`, `pwd`, `exit`, `grep`.
 * Вызов внешних программ: да.
 
 ### Фаза 2 (подстановки и пайплайны)
@@ -446,6 +473,11 @@ Some example text
 > x=ex
 > y=it
 > $x$y   # expand → exit -> исполнение exit
+
+> grep "pattern" file.txt
+> grep -i "pattern" file.txt
+> grep -w "word" file.txt
+> grep -A 2 "match" file.txt
 ```
 
 ---
