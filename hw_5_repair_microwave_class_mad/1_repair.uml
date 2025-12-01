@@ -1,0 +1,168 @@
+@startuml
+skinparam sequence {
+  ArrowColor #003366
+  ActorBorderColor #003366
+  ParticipantBorderColor #003366
+  ParticipantBackgroundColor #f0f8ff
+  ActorBackgroundColor #e6f3ff
+  LifeLineBorderColor #666666
+  LifeLineBackgroundColor #ffffff
+}
+
+actor "Механик" as Mech
+actor "Диспетчер" as Disp
+actor "Бригадир" as Foreman
+actor "Инженер ОТК" as QC
+participant "Мобильное приложение" as Mobile
+participant "API Gateway" as API
+participant "Defect Service" as DefectSvc
+participant "Repair Service" as RepairSvc
+participant "Resources Service" as ResourcesSvc
+participant "База данных" as DB
+participant "Кэш (Redis)" as Cache
+participant "Брокер сообщений" as MQ
+
+== Подготовка к работе (начало смены) ==
+
+Mech -> Mobile: Регистрация в начале смены
+Mobile -> API: POST /api/shifts/checkin\n{mechanicId, zoneId}
+API -> ResourcesSvc: registerMechanicPresence(mechanicId, zoneId)
+ResourcesSvc -> DB: Обновить MechanicShift\n(present=true, availableForJobs=true)
+ResourcesSvc -> Cache: Обновить доступность механика
+ResourcesSvc -> API: Registration successful
+API -> Mobile: 200 OK
+
+== Регистрация дефекта и диагностика ==
+
+Mech -> Mobile: Сканирует VIN автомобиля
+Mobile -> API: POST /api/defects\n{vehicleId, stage, area, locationOnDiagram, probableCause, severity}
+API -> DefectSvc: registerDefect(defectData)
+DefectSvc -> DB: Сохранить Defect\n(status=Registered)
+DB -> DefectSvc: ID дефекта
+DefectSvc -> API: Defect registered
+API -> Mobile: 201 Created\n{defectId}
+
+Mech -> Mobile: Проводит углубленную диагностику
+Mobile -> API: POST /api/defects/{id}/diagnosis\n{diagnosisDetails, estimatedRepairTime}
+API -> DefectSvc: updateDiagnosis(defectId, diagnosisData)
+DefectSvc -> DB: Обновить Defect\n(diagnosis, diagnosedBy, status=Diagnosed)
+DefectSvc -> MQ: Опубликовать DefectDiagnosed
+DefectSvc -> API: Diagnosis updated
+API -> Mobile: 200 OK
+
+== Направление в ремонтную зону ==
+
+Disp -> API: GET /api/repair-zones/availability\n{includeMechanics=true}
+API -> ResourcesSvc: getAvailableZonesWithMechanics()
+ResourcesSvc -> Cache: Получить статусы мест + доступных механиков
+Cache -> ResourcesSvc: Данные по зонам и механикам
+ResourcesSvc -> API: Расширенная информация о доступности
+API -> Disp: Available zones with mechanics count
+
+Disp -> API: POST /api/repair-orders\n{defectId, zoneId, bayId, priority}
+API -> RepairSvc: createRepairOrder(orderData)
+RepairSvc -> DB: Сохранить RepairOrder\n(status=Planned, priority)
+RepairSvc -> ResourcesSvc: occupyBay(zoneId, bayId)
+ResourcesSvc -> Cache: Обновить статус места\nна OCCUPIED
+ResourcesSvc -> RepairSvc: Bay occupied
+RepairSvc -> MQ: Опубликовать RepairOrderCreated
+RepairSvc -> API: Repair order created
+API -> Disp: 201 Created\n{repairOrderId}
+
+== Назначение ремонта бригадиром ==
+
+Foreman -> API: GET /api/mechanics/available?zoneId=...
+API -> ResourcesSvc: getAvailableMechanics(zoneId)
+ResourcesSvc -> DB: Проверить MechanicShift.availableForJobs\n+ текущая смена
+DB -> ResourcesSvc: Список доступных механиков
+ResourcesSvc -> API: Available mechanics
+API -> Foreman: Mechanics list
+
+Foreman -> API: POST /api/repair-orders/{id}/assign\n{mechanicId, estimatedDuration}
+API -> RepairSvc: assignMechanic(orderId, assignmentData)
+RepairSvc -> DB: Обновить RepairOrder\n(assignedTo, status=Assigned, assignedBy)
+RepairSvc -> ResourcesSvc: markMechanicBusy(mechanicId)
+ResourcesSvc -> Cache: Обновить статус механика\nна BUSY
+RepairSvc -> MQ: Опубликовать RepairOrderAssigned
+RepairSvc -> API: Assignment successful
+API -> Foreman: 200 OK
+
+== Выполнение ремонта ==
+
+Mech -> Mobile: Начало работы над заказом
+Mobile -> API: POST /api/repair-orders/{id}/start
+API -> RepairSvc: startRepair(orderId)
+RepairSvc -> DB: Обновить RepairOrder\n(status=InProgress, startAt=now())
+RepairSvc -> WorkLog: Создать запись работы\n(startAt=now(), mechanicId)
+WorkLog -> DB: Сохранить WorkLog
+RepairSvc -> MQ: Опубликовать RepairStarted
+RepairSvc -> API: Repair started
+API -> Mobile: 200 OK
+
+Mech -> Mobile: Ввод результатов ремонта\n(actions, diagnosis, partsUsed)
+Mobile -> API: POST /api/repair-orders/{id}/complete\n{repairData}
+API -> RepairSvc: completeRepair(orderId, data)
+RepairSvc -> DB: Обновить RepairOrder\n(status=Completed, endAt=now(), repairData)
+RepairSvc -> ResourcesSvc: freeBay(zoneId, bayId)
+ResourcesSvc -> Cache: Обновить статус места\nна FREE
+RepairSvc -> ResourcesSvc: markMechanicAvailable(mechanicId)
+ResourcesSvc -> Cache: Обновить статус механика\nна AVAILABLE
+RepairSvc -> WorkLog: Завершить запись работы\n(endAt=now(), durationMin)
+WorkLog -> DB: Обновить WorkLog
+RepairSvc -> MQ: Опубликовать RepairCompleted
+RepairSvc -> API: Repair completed
+API -> Mobile: 200 OK
+
+== Верификация ОТК ==
+
+QC -> API: GET /api/repair-orders/pending-verification
+API -> RepairSvc: getOrdersForVerification()
+RepairSvc -> DB: Получить заказы со статусом Completed
+DB -> RepairSvc: Список заказов
+RepairSvc -> API: Orders for verification
+API -> QC: Orders list
+
+QC -> API: POST /api/repair-orders/{id}/verify\n{verified, notes, qcInspectorId}
+API -> RepairSvc: verifyRepair(orderId, verificationData)
+
+alt Ремонт принят
+  RepairSvc -> DB: Обновить RepairOrder\n(status=Verified, verifiedBy, verifiedAt)
+  RepairSvc -> DefectSvc: updateDefectStatus(defectId, Closed)
+  DefectSvc -> DB: Обновить Defect\n(status=Closed)
+  RepairSvc -> MQ: Опубликовать RepairVerified
+else Ремонт отклонен
+  RepairSvc -> DB: Обновить RepairOrder\n(status=Rejected, rejectionReason)
+  RepairSvc -> DefectSvc: updateDefectStatus(defectId, Reopened)
+  DefectSvc -> DB: Обновить Defect\n(status=Reopened)
+  RepairSvc -> MQ: Опубликовать RepairRejected
+end
+
+RepairSvc -> API: Verification completed
+API -> QC: 200 OK
+
+== Формирование отчетов (конец смены) ==
+
+group End of Shift Reporting
+  Foreman -> API: GET /api/reports/shift/brigade\n{shiftId, teamId}
+  API -> ReportingSvc: generateBrigadeReport(shiftId, teamId)
+  ReportingSvc -> DB: Агрегация данных по ремонтам\n(количество, время, статистика по механикам)
+  DB -> ReportingSvc: Данные для отчета
+  ReportingSvc -> API: Brigade report with mechanic stats
+  API -> Foreman: PDF/Excel отчет
+  
+  Disp -> API: GET /api/reports/shift/summary\n{shiftId, zoneId}
+  API -> ReportingSvc: generateShiftSummary(shiftId, zoneId)
+  ReportingSvc -> DB: Агрегация общих метрик\n+ статистика по местам дефекта
+  DB -> ReportingSvc: Сводные данные
+  ReportingSvc -> API: Shift summary with defect analytics
+  API -> Disp: Summary report
+  
+  QC -> API: GET /api/reports/shift/qc\n{shiftId}
+  API -> ReportingSvc: generateQCReport(shiftId)
+  ReportingSvc -> DB: Статистика верификации\n+ среднее время ремонта
+  DB -> ReportingSvc: QC analytics
+  ReportingSvc -> API: QC shift report
+  API -> QC: QC report with repair statistics
+end
+
+@enduml

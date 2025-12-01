@@ -1,0 +1,93 @@
+@startuml
+hide empty description
+
+skinparam state {
+  BackgroundColor #f0f8ff
+  BorderColor #003366
+  ArrowColor #003366
+  FontSize 13
+}
+
+title Диаграмма состояний микроволновой печи\nState Machine Diagram: Microwave Oven
+
+state "Idle\n(Ожидание)" as Idle : entry / lightOff\n do / displayClock
+
+state "Power On\n(Включена)" as PowerOn : entry / lightOn, displayReady\n do / acceptInput
+
+state "Setting Time\n(Установка времени)" as TimeSet : entry / blinkDisplay\n do / acceptTimeInput
+
+state "Setting Power\n(Установка мощности)" as PowerSet : entry / showPowerLevel\n do / cyclePowerLevels
+
+state "Cooking\n(Приготовление)" as Cooking : entry / startMagnetron, rotatePlate\n do / countdownTimer\n exit / stopMagnetron
+
+state "Paused\n(Пауза)" as Paused : entry / stopMagnetron, beep\n do / maintainState
+
+state "Finished\n(Завершено)" as Finished : entry / beep3Times, lightOn\n do / blinkDisplay
+
+state "Door Open\n(Дверь открыта)" as DoorOpen : entry / lightOn, safetyLock\n do / monitorDoor\n exit / lightOff
+
+[*] --> Idle
+
+' Основные переходы по управлению питанием
+Idle --> PowerOn : powerPressed [doorClosed]
+Idle --> DoorOpen : doorOpened
+
+PowerOn --> Idle : powerPressed
+PowerOn --> TimeSet : timeButtonPressed
+PowerOn --> PowerSet : powerButtonPressed
+PowerOn --> Cooking : startPressed [timerSet && doorClosed]
+PowerOn --> DoorOpen : doorOpened
+
+' Управление настройками
+TimeSet --> PowerOn : confirmPressed
+TimeSet --> PowerOn : cancelPressed
+
+PowerSet --> PowerOn : confirmPressed
+PowerSet --> PowerOn : cancelPressed
+
+' Управление процессом приготовления
+Cooking --> Paused : pausePressed
+Cooking --> Paused : doorOpened / emergencyStop
+Cooking --> Finished : timerExpired
+Cooking --> PowerOn : cancelPressed
+
+' Управление паузой
+Paused --> Cooking : startPressed [doorClosed]
+Paused --> Cooking : doorClosed [wasOpened]
+Paused --> PowerOn : cancelPressed
+
+' Завершение работы
+Finished --> Idle : doorOpened
+Finished --> Idle : powerPressed
+Finished --> PowerOn : anyKeyPressed
+
+' Операции с дверцей
+DoorOpen --> Idle : doorClosed [wasIdle]
+DoorOpen --> PowerOn : doorClosed [wasPowered]
+DoorOpen --> Cooking : doorClosed [wasCooking] / resumeCooking
+
+note right of Cooking
+  **Функции безопасности:\nSafety Features:**
+  - Открытие двери останавливает\n  магнетрон мгновенно
+  - Door open immediately stops\n  magnetron
+  - Защита от перегрева
+  - Overheat protection
+end note
+
+note left of TimeSet
+  **Настройки таймера:\nTimer Settings:**
+  - Макс: 99 минут
+  - Max: 99 minutes
+  - Быстрый старт: 30с, 1м, 2м
+  - Quick start: 30s, 1m, 2m
+end note
+
+note bottom of DoorOpen
+  **Безопасность при открытой двери:\nDoor Safety:**
+  - Магнетрон блокируется
+  - Magnetron safety lock
+  - Свет включается автоматически
+  - Light turns on automatically
+end note
+
+@enduml
