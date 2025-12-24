@@ -23,6 +23,8 @@ func NewRegistry() *Registry {
 	registry.Register(NewPwdCommand())
 	registry.Register(NewExitCommand())
 	registry.Register(NewGrepCommand())
+	registry.Register(NewCdCommand())
+	registry.Register(NewLsCommand())
 
 	return registry
 }
