@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="2128px" preserveAspectRatio="none" style="width:5772px;height:2128px;background:#FFFFFF;" version="1.1" viewBox="0 0 5772 2128" width="5772px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="26.2969" id="_title" style="stroke:none;stroke-width:1.0;" width="267" x="2745.75" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="257" x="2750.75" y="22.9951">VCS — Диаграмма компонентов</text><!--MD5=[d39d75d20503768f828654fc47e3a2bb]
+cluster CLI--><g id="cluster_CLI"><rect fill="none" height="380" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="232" x="1263.5" y="44.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="24" x="1367.5" y="59.292">CLI</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="209" x="1275" y="75.5889">(консольный интерфейс)</text></g><!--MD5=[fac864e77539af95038f0151207ed802]
+cluster API--><g id="cluster_API"><rect fill="none" height="120" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="222" x="1242.5" y="473.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="85" x="1311" y="488.292">Library API</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="201" x="1253" y="504.5889">(публичная библиотека)</text></g><!--MD5=[4b75a8c45955889c019af6ea18cf67a5]
+cluster APP--><g id="cluster_APP"><rect fill="none" height="311" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="2400" x="164.5" y="640.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="160" x="1284.5" y="655.792">Application Services</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="146" x="1291.5" y="672.0889">(сервисный слой)</text></g><!--MD5=[86d7992bc7b4a848d0a98c76be6384ab]
+cluster DOMAIN--><g id="cluster_DOMAIN"><rect fill="none" height="252" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="910" x="3779.5" y="1397.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="110" x="4179.5" y="1412.792">Domain Model</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="228" x="4120.5" y="1429.0889">(ядро предметной области)</text></g><!--MD5=[e441db85f5053e408ff6802c2180bfaa]
+cluster WS--><g id="cluster_WS"><rect fill="none" height="136" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="656" x="4332.5" y="1706.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="88" x="4616.5" y="1721.792">Workspace</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="213" x="4554" y="1738.0889">(рабочая копия и индекс)</text></g><!--MD5=[2e8987c52304ead4414887c2e3c78ede]
+cluster ST--><g id="cluster_ST"><rect fill="none" height="416" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="895" x="2535.5" y="1706.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="62" x="2952" y="1721.792">Storage</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="229" x="2868.5" y="1738.0889">(объекты/pack/компрессия)</text></g><!--MD5=[9468776100f288ab4535b12663838d67]
+cluster DME--><g id="cluster_DME"><rect fill="none" height="120" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="527" x="5239.5" y="831.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="140" x="5433" y="846.792">Diff/Merge Engine</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="263" x="5371.5" y="863.0889">(алгоритмы сравнения/слияния)</text></g><!--MD5=[041184c80324b7db9861229ed8810e9f]
+cluster RC--><g id="cluster_RC"><rect fill="none" height="273" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="686" x="2588.5" y="831.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="110" x="2876.5" y="846.792">Remote Client</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="171" x="2846" y="863.0889">(клиент удалённого)</text></g><!--MD5=[82730e224b6509be5d181d7d4b0e8fee]
+cluster SRV--><g id="cluster_SRV"><rect fill="none" height="533" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="457" x="3298.5" y="984.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="53" x="3500.5" y="999.792">Server</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="287" x="3383.5" y="1016.0889">(удалённый сервер репозиториев)</text></g><!--MD5=[be14b843366d59eaa6e00cba2e43864a]
+entity ConsoleApp--><g id="elem_ConsoleApp"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="160" x="1299.5" y="95.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="1309.5" y="118.292">ConsoleApp</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140" x="1309.5" y="134.5889">Точка входа: main()</text></g><!--MD5=[b8966a4a60ec894312d4f55fd40cce21]
+entity Parser--><g id="elem_Parser"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="200" x="1279.5" y="225.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="1289.5" y="248.292">CommandParser</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="180" x="1289.5" y="264.5889">Парсинг argv -&gt; команда</text></g><!--MD5=[7cea0504e8cf45094c2de341d7a384ca]
+entity Commands--><g id="elem_Commands"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="147" x="1280" y="355.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="1290" y="378.292">Commands</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="127" x="1290" y="394.5889">Набор команд CLI</text></g><!--MD5=[b9f9dba2b5083515d3d2b750fc489efb]
+entity Facade--><g id="elem_Facade"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="190" x="1258.5" y="524.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="1268.5" y="547.292">VcsFacade</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="170" x="1268.5" y="563.5889">Единая точка входа API</text></g><!--MD5=[ff07cee4ce3de155383e32cf6a4b048d]
+entity RepoSvc--><g id="elem_RepoSvc"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="332" x="1187.5" y="691.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="1197.5" y="714.792">RepoService</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="312" x="1197.5" y="731.0889">Открыть/инициализировать репозиторий</text></g><!--MD5=[e71d0bda12b6f3a5196dd207167a7757]
+entity CommitSvc--><g id="elem_CommitSvc"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="264" x="1554.5" y="691.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103" x="1564.5" y="714.792">CommitService</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="244" x="1564.5" y="731.0889">Сбор состояния -&gt; новый commit</text></g><!--MD5=[ec6b663590b64c1132b2c6488f77eeda]
+entity BranchSvc--><g id="elem_BranchSvc"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="309" x="458" y="691.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99" x="468" y="714.792">BranchService</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="289" x="468" y="731.0889">Создать/удалить ветку, резолвить имя</text></g><!--MD5=[6de0d6b87e85a1611532430b6aac5c67]
+entity CheckoutSvc--><g id="elem_CheckoutSvc"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="301" x="1854" y="691.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117" x="1864" y="714.792">CheckoutService</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="281" x="1864" y="731.0889">Развернуть ревизию в рабочую копию</text></g><!--MD5=[7e753e113847159cd81ce93247caa6b5]
+entity LogSvc--><g id="elem_LogSvc"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="350" x="802.5" y="691.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="812.5" y="714.792">LogService</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="330" x="812.5" y="731.0889">Получить историю коммитов текущей ветки</text></g><!--MD5=[8215e87ac65b9ca2567db20ac9fe6409]
+entity MergeSvc--><g id="elem_MergeSvc"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="358" x="2190.5" y="691.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="2200.5" y="714.792">MergeService</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="338" x="2200.5" y="731.0889">Слить ветки, сформировать результат merge</text></g><!--MD5=[defcf6a129b308d516ad2286fc4a7874]
+entity RemoteSvc--><g id="elem_RemoteSvc"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="242" x="180.5" y="691.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105" x="190.5" y="714.792">RemoteService</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="222" x="190.5" y="731.0889">clone/fetch/pull/push сценарии</text></g><!--MD5=[9fab2a6791daf43812886c68c0e48d63]
+entity CrSvc--><g id="elem_CrSvc"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="365" x="2133" y="882.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="175" x="2143" y="905.792">ConflictResolutionService</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="345" x="2143" y="922.0889">Разрешение конфликтов (интерактивно/авто)</text></g><!--MD5=[b9043c2a9c0284b5105a937d12c4195f]
+entity Repo--><g id="elem_Repo"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="266" x="4383.5" y="1580.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="74" x="4393.5" y="1603.792">Repository</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="246" x="4393.5" y="1620.0889">Агрегат: workdir/index/refs/objects</text></g><!--MD5=[c5039d679603ffb92845b2aa3bc0455b]
+entity Objects--><g id="elem_Objects"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="364" x="4030.5" y="1448.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="53" x="4040.5" y="1471.792">Objects</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="344" x="4040.5" y="1488.0889">Commit/Tree/Blob как иммутабельные объекты</text></g><!--MD5=[3291c4f21d6d2db381d25a80a411abc1]
+entity Refs--><g id="elem_Refs"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="200" x="3795.5" y="1448.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="31" x="3805.5" y="1471.792">Refs</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="180" x="3805.5" y="1488.0889">Ветки, HEAD, remote refs</text></g><!--MD5=[043866839a968dd94709732353be87a8]
+entity MergeModel--><g id="elem_MergeModel"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="243" x="4430" y="1448.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90" x="4440" y="1471.792">Merge Model</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="223" x="4440" y="1488.0889">Conflict/Resolution/MergeResult</text></g><!--MD5=[b4b82f13279567ef492b1e79448340f5]
+entity Workdir--><g id="elem_Workdir"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="296" x="4356.5" y="1765.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="4366.5" y="1788.792">WorkingDirectory</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="276" x="4366.5" y="1805.0889">Чтение/запись файлов пользователя</text></g><!--MD5=[2b768cf920ecee2eebe6cef60f157368]
+entity Index--><g id="elem_Index"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="257" x="4688" y="1765.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="37" x="4698" y="1788.792">Index</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="237" x="4698" y="1805.0889">Staging area: подготовка снимка</text></g><!--MD5=[5ae79695dcaadcd84dbd6fcdb28f3d61]
+entity Store--><g id="elem_Store"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="252" x="3135.5" y="1765.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="3145.5" y="1788.792">ObjectStore</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="232" x="3145.5" y="1805.0889">Интерфейс хранения объектов</text></g><!--MD5=[3818d29606c99efaeaf98f0f4cfa9ac7]
+entity Loose--><g id="elem_Loose"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="212" x="3186.5" y="1906.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="3196.5" y="1929.792">LooseStore</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="192" x="3196.5" y="1946.0889">Отдельные объекты по id</text></g><!--MD5=[38beaf35c16586f4de6e538923e76087]
+entity Pack--><g id="elem_Pack"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="285" x="2866" y="1906.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="2876" y="1929.792">PackStore</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="265" x="2876" y="1946.0889">Pack для эффективности/передачи</text></g><!--MD5=[a3ecd5c03769b762db5e94a60f9cfcbd]
+entity Compressor--><g id="elem_Compressor"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="246" x="2885.5" y="2045.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85" x="2895.5" y="2068.792">Compressor</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="226" x="2895.5" y="2085.0889">Стратегия сжатия/распаковки</text></g><!--MD5=[34abba6bdddb727b84a690d742f511d5]
+entity PackBuilder--><g id="elem_PackBuilder"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="271" x="2560" y="1906.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="81" x="2570" y="1929.792">PackBuilder</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="251" x="2570" y="1946.0889">Собрать pack из набора объектов</text></g><!--MD5=[6168d21ce316991f155952d244151bc7]
+entity Diff--><g id="elem_Diff"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="175" x="5575" y="882.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="5585" y="905.792">DiffEngine</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="155" x="5585" y="922.0889">diff деревьев/файлов</text></g><!--MD5=[b27101d3ea00ce0a8e91004a8b913797]
+entity Planner--><g id="elem_Planner"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="284" x="5255.5" y="882.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="5265.5" y="905.792">MergePlanner</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="264" x="5265.5" y="922.0889">план действий merge + конфликты</text></g><!--MD5=[af52c5d15335be5672f0e2d9b15c8f1e]
+entity Transport--><g id="elem_Transport"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="190" x="3068.5" y="882.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="3078.5" y="905.792">RemoteTransport</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="170" x="3078.5" y="922.0889">Абстракция протокола</text></g><!--MD5=[8d471159d074b9f89874860b62352626]
+entity Http--><g id="elem_Http"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="239" x="3020" y="1035.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="3030" y="1058.792">HttpTransport</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="219" x="3030" y="1075.0889">HTTP реализация транспорта</text></g><!--MD5=[625e78e112f3cf76a4bbe1c41551531d]
+entity Mirror--><g id="elem_Mirror"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="195" x="2604" y="882.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="2614" y="905.792">RemoteRepoMirror</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="175" x="2614" y="922.0889">Обновление remote refs</text></g><!--MD5=[1392fad4ac32b5b68f18008cd4165970]
+entity RCfg--><g id="elem_RCfg"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="199" x="2834" y="882.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99" x="2844" y="905.792">RemoteConfig</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="179" x="2844" y="922.0889">URL + настройки remote</text></g><!--MD5=[b1435b213846e3ddcd1e6c1cd6b83b9a]
+entity Server--><g id="elem_Server"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="206" x="3449.5" y="1035.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="3459.5" y="1058.792">VcsServer</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="186" x="3459.5" y="1075.0889">Процесс/служба сервера</text></g><!--MD5=[4a115316e1981cbd82c3c4a3c0c0ad15]
+entity RepoCtl--><g id="elem_RepoCtl"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="178" x="3314.5" y="1167.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="104" x="3324.5" y="1190.792">RepoController</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158" x="3324.5" y="1207.0889">clone/fetch endpoint'ы</text></g><!--MD5=[b4de30f6ce3066b86dfdbffe7dcf6d47]
+entity PushCtl--><g id="elem_PushCtl"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="122" x="3527.5" y="1167.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102" x="3537.5" y="1190.792">PushController</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="3537.5" y="1207.0889">push endpoint</text></g><!--MD5=[dca13d841d855d714f1f3597b44154f2]
+entity SRepoSvc--><g id="elem_SRepoSvc"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="239" x="3396" y="1297.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131" x="3406" y="1320.792">ServerRepoService</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="219" x="3406" y="1337.0889">Создать/применить pack, refs</text></g><!--MD5=[d6276b193dab8aa1cf65f7635e518919]
+entity ACL--><g id="elem_ACL"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="136" x="3603.5" y="1448.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="3613.5" y="1471.792">AccessControl</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="3613.5" y="1488.0889">Права read/write</text></g><!--MD5=[39222abbbfd087a4fdab60e627dc976f]
+entity Auth--><g id="elem_Auth"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="253" x="3315" y="1448.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="3325" y="1471.792">AuthService</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="233" x="3325" y="1488.0889">Аутентификация пользователя</text></g><g id="elem_GMN836"><path d="M2948.5,675.2969 L2948.5,760.9609 L3362.5,760.9609 L3362.5,685.2969 L3352.5,675.2969 L2948.5,675.2969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M3352.5,675.2969 L3352.5,685.2969 L3362.5,685.2969 L3352.5,675.2969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="113" x="2954.5" y="692.3638">Процесс commit:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="330" x="2954.5" y="707.4966">1) Index.writeTree() строит Tree из staged файлов</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="393" x="2954.5" y="722.6294">2) Создаётся Commit(tree, parents, author, date, message)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="375" x="2954.5" y="737.7622">3) Commit/Tree/Blob кладутся в ObjectStore (loose/pack)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="290" x="2954.5" y="752.895">4) Обновляется ref текущей ветки и HEAD</text></g><g id="elem_GMN839"><path d="M3397.5,675.2969 L3397.5,760.9609 L3751.5,760.9609 L3751.5,685.2969 L3741.5,675.2969 L3397.5,675.2969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M3741.5,675.2969 L3741.5,685.2969 L3751.5,685.2969 L3741.5,675.2969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="122" x="3403.5" y="692.3638">Процесс checkout:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="275" x="3403.5" y="707.4966">1) resolveRevision(nameOrId) -&gt; RevisionId</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="207" x="3403.5" y="722.6294">2) RevisionId -&gt; Commit -&gt; Tree</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="333" x="3403.5" y="737.7622">3) WorkingDirectory приводится к состоянию Tree</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="236" x="3403.5" y="752.895">4) Index синхронизируется (CLEAN)</text></g><g id="elem_GMN842"><path d="M2583.5,682.7969 L2583.5,753.3281 L2913.5,753.3281 L2913.5,692.7969 L2903.5,682.7969 L2583.5,682.7969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M2903.5,682.7969 L2903.5,692.7969 L2913.5,692.7969 L2903.5,682.7969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="83" x="2589.5" y="699.8638">Процесс log:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="280" x="2589.5" y="714.9966">идём от HEAD по parents (Commit graph),</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="309" x="2589.5" y="730.1294">собираем CommitInfo (id/message/author/date)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="241" x="2589.5" y="745.2622">в пределах текущей ветки (по ref).</text></g><g id="elem_GMN845"><path d="M3786,667.7969 L3786,768.5938 L4257,768.5938 L4257,677.7969 L4247,667.7969 L3786,667.7969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M4247,667.7969 L4247,677.7969 L4257,677.7969 L4247,667.7969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="106" x="3792" y="684.8638">Процесс merge:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="450" x="3792" y="699.9966">1) base = merge-base(ours, theirs) (можно как часть MergePlanner)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="255" x="3792" y="715.1294">2) DiffEngine: base-&gt;ours, base-&gt;theirs</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="383" x="3792" y="730.2622">3) MergePlanner: действия APPLY_* или CONFLICT по path</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="389" x="3792" y="745.395">4) ConflictResolutionService/Resolver: выбирает стратегию</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="435" x="3792" y="760.5278">5) Если без конфликтов: создаётся merge commit (2 родителя)</text></g><g id="elem_GMN848"><path d="M6,507.7969 L6,593.4609 A0,0 0 0 0 6,593.4609 L297.5,593.4609 L301.5,691.6969 L305.5,593.4609 L597,593.4609 A0,0 0 0 0 597,593.4609 L597,517.7969 L587,507.7969 L6,507.7969 A0,0 0 0 0 6,507.7969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M587,507.7969 L587,517.7969 L597,517.7969 L587,507.7969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="217" x="12" y="524.8638">Процессы удалённых операций:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="418" x="12" y="539.9966">clone: скачать refs + pack -&gt; распаковать -&gt; локальный repo</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="405" x="12" y="555.1294">fetch: wants/haves -&gt; download pack -&gt; обновить remote refs</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="473" x="12" y="570.2622">pull: fetch + (merge/rebase стратегия, здесь merge в текущую ветку)</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="570" x="12" y="585.395">push: собрать недостающие объекты в pack -&gt; upload -&gt; обновить refs на сервере</text></g><g id="elem_GMN851"><path d="M3454.5,1905.7969 L3454.5,1961.1953 L3950.5,1961.1953 L3950.5,1915.7969 L3940.5,1905.7969 L3454.5,1905.7969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M3940.5,1905.7969 L3940.5,1915.7969 L3950.5,1915.7969 L3940.5,1905.7969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="84" x="3460.5" y="1922.8638">Компрессия:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="475" x="3460.5" y="1937.9966">Compressor как стратегия — можно включить/выключить/заменить.</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="456" x="3460.5" y="1953.1294">Pack — оптимизация хранения/передачи, loose — простая модель.</text></g><g id="elem_GMN854"><path d="M4768.5,1897.7969 L4768.5,1968.3281 L5192.5,1968.3281 L5192.5,1907.7969 L5182.5,1897.7969 L4768.5,1897.7969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M5182.5,1897.7969 L5182.5,1907.7969 L5192.5,1907.7969 L5182.5,1897.7969 " fill="#FEFFDD" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="239" x="4774.5" y="1914.8638">Жизненный цикл файла в системе:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="403" x="4774.5" y="1929.9966">WorkingDirectory хранит текущее состояние пользователя,</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="289" x="4774.5" y="1945.1294">Index — staged (подготовлено к коммиту),</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="343" x="4774.5" y="1960.2622">Commit — иммутабельный снимок через Tree/Blob.</text></g><!--MD5=[2246c40633c6facb3470131aaef82c71]
+link ConsoleApp to Parser--><g id="link_ConsoleApp_Parser"><path d="M1379.5,148.3969 C1379.5,169.0569 1379.5,198.2069 1379.5,220.1269 " fill="none" id="ConsoleApp-to-Parser" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1379.5,225.2469,1383.5,216.2469,1379.5,220.2469,1375.5,216.2469,1379.5,225.2469" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="70" x="1380.5" y="191.3638">запускает</text></g><!--MD5=[17cc0db0f2d229cbaee87ca9261cf84a]
+link Parser to Commands--><g id="link_Parser_Commands"><path d="M1374.3,278.3969 C1370.1,299.0569 1364.18,328.2069 1359.73,350.1269 " fill="none" id="Parser-to-Commands" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1358.69,355.2469,1364.4089,347.2285,1359.6898,350.3479,1356.5704,345.6288,1358.69,355.2469" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="128" x="1368.5" y="321.3638">создаёт/выбирает</text></g><!--MD5=[6c10429dad0ce59143b920c279433f9e]
+link Commands to Facade--><g id="link_Commands_Facade"><path d="M1353.5,408.5269 C1353.5,438.1869 1353.5,486.9369 1353.5,518.7069 " fill="none" id="Commands-to-Facade" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1353.5,524.0369,1357.5,515.0369,1353.5,519.0369,1349.5,515.0369,1353.5,524.0369" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="92" x="1354.5" y="453.3638">вызывает API</text></g><!--MD5=[eca87f83f40f68cea32426b837031528]
+link Facade to RepoSvc--><g id="link_Facade_RepoSvc"><path d="M1353.5,577.6569 C1353.5,607.0469 1353.5,654.9969 1353.5,686.3469 " fill="none" id="Facade-to-RepoSvc" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1353.5,691.6169,1357.5,682.6169,1353.5,686.6169,1349.5,682.6169,1353.5,691.6169" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[13050ba1c9633a7ed55ee38dc9c58d6b]
+link Facade to CommitSvc--><g id="link_Facade_CommitSvc"><path d="M1415.98,577.4469 C1451.93,592.6569 1497.73,612.8269 1537.5,632.7969 C1572.31,650.2769 1610.51,671.9869 1639.52,689.0269 " fill="none" id="Facade-to-CommitSvc" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1644.09,691.7269,1638.3676,683.711,1639.7825,689.188,1634.3055,690.6029,1644.09,691.7269" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[aa635e75a76b44d1d927f6e03bf9ee5f]
+link Facade to BranchSvc--><g id="link_Facade_BranchSvc"><path d="M1258.38,556.1969 C1143.75,563.5569 946.36,582.8969 784.5,632.7969 C740.23,646.4469 693.23,670.2469 659.57,689.1169 " fill="none" id="Facade-to-BranchSvc" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="655.12,691.6269,664.9242,690.6901,659.4752,689.1708,660.9945,683.7218,655.12,691.6269" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7f42481977cc23b239217391cdd5ae2f]
+link Facade to CheckoutSvc--><g id="link_Facade_CheckoutSvc"><path d="M1448.55,559.2669 C1547.43,568.9769 1705.79,590.0469 1836.5,632.7969 C1879.56,646.8769 1925.3,670.5269 1958.17,689.2269 " fill="none" id="Facade-to-CheckoutSvc" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1962.51,691.7169,1956.686,683.7745,1958.1705,689.2331,1952.712,690.7177,1962.51,691.7169" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0b608aadab7f2f35e62fe9e54ffd3b8f]
+link Facade to LogSvc--><g id="link_Facade_LogSvc"><path d="M1295.16,577.4769 C1226.03,607.9069 1111.3,658.4069 1040.28,689.6669 " fill="none" id="Facade-to-LogSvc" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1035.66,691.6969,1045.5088,691.7397,1040.2378,689.686,1042.2914,684.4151,1035.66,691.6969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1afb6d59af5b0272bfb50b0e136efc25]
+link Facade to MergeSvc--><g id="link_Facade_MergeSvc"><path d="M1448.79,551.8369 C1603.22,553.9669 1916.68,566.9569 2172.5,632.7969 C2223.24,645.8569 2277.75,670.1069 2316.53,689.2869 " fill="none" id="Facade-to-MergeSvc" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2321.19,691.5969,2314.9193,684.0023,2316.715,689.3665,2311.3507,691.1622,2321.19,691.5969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ca4430f4963367487e3de886c81d602b]
+link Facade to RemoteSvc--><g id="link_Facade_RemoteSvc"><path d="M1258.15,557.7969 C1039.86,571.8769 516.75,607.7469 440.5,632.7969 C402.93,645.1369 364.88,669.2569 338.11,688.5769 " fill="none" id="Facade-to-RemoteSvc" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="333.91,691.6369,343.5404,689.5742,337.9524,688.6943,338.8324,683.1063,333.91,691.6369" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[23c3b3278eca442d85f65f4d8073c163]
+link RepoSvc to Repo--><g id="link_RepoSvc_Repo"><path d="M1431.4,744.8869 C1463.83,754.3269 1502.11,763.8969 1537.5,768.7969 C1807.72,806.1869 3720.8,774.3369 3992.5,798.7969 C4171.38,814.8969 4588.5,878.4869 4588.5,908.2969 C4588.5,908.2969 4588.5,908.2969 4588.5,1130.2969 C4588.5,1311.8269 4788.27,1372.8469 4690.5,1525.7969 C4675.23,1549.6869 4650.85,1566.5969 4625.12,1578.5169 " fill="none" id="RepoSvc-to-Repo" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="4620.3,1580.6869,4630.1487,1580.6297,4624.8572,1578.6297,4626.8572,1573.3382,4620.3,1580.6869" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="137" x="4606.5" y="1198.8638">создаёт/открывает</text></g><!--MD5=[73a11bb6e15dbfe4de958824519e866a]
+link CommitSvc to Repo--><g id="link_CommitSvc_Repo"><path d="M1749.27,744.7969 C1775.73,754.2769 1807.15,763.9169 1836.5,768.7969 C1988.75,794.1169 4465.96,756.8869 4614.5,798.7969 C4705.72,824.5369 4797.5,813.5169 4797.5,908.2969 C4797.5,908.2969 4797.5,908.2969 4797.5,1476.2969 C4797.5,1545.8469 4725.71,1578.3069 4654.7,1593.3969 " fill="none" id="CommitSvc-to-Repo" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="4649.59,1594.4469,4659.2093,1596.5609,4654.4884,1593.4443,4657.6051,1588.7234,4649.59,1594.4469" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="267" x="4798.5" y="1198.8638">читает workdir/index, пишет objects/refs</text></g><!--MD5=[2532662e0e1d9e856e79a75244c5cc9d]
+link BranchSvc to Refs--><g id="link_BranchSvc_Refs"><path d="M685.2,744.8969 C715.5,754.3269 751.3,763.9069 784.5,768.7969 C1047.68,807.5969 2913.48,775.7069 3178.5,798.7969 C3329.45,811.9469 3851.5,756.7769 3851.5,908.2969 C3851.5,908.2969 3851.5,908.2969 3851.5,1325.2969 C3851.5,1367.7969 3868.17,1414.4269 3880.99,1444.0069 " fill="none" id="BranchSvc-to-Refs" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3883.01,1448.5969,3883.0528,1438.7481,3880.9992,1444.019,3875.7282,1441.9654,3883.01,1448.5969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="175" x="3852.5" y="1133.8638">управляет ветками/HEAD</text></g><!--MD5=[26bc36ed044fc4e460e72ef2d362abc3]
+link CheckoutSvc to WS--><g id="link_CheckoutSvc_WS"><path d="M2075.9,744.9069 C2105.66,754.3369 2140.84,763.9169 2173.5,768.7969 C2448.68,809.9469 4401.09,766.9069 4677.5,798.7969 C4809.14,813.9869 5119.5,884.7769 5119.5,908.2969 C5119.5,908.2969 5119.5,908.2969 5119.5,1130.2969 C5119.5,1175.2169 5099.93,1183.7669 5074.5,1220.7969 C5039.51,1271.7469 4980.5,1261.4869 4980.5,1323.2969 C4980.5,1323.2969 4980.5,1323.2969 4980.5,1608.2969 C4980.5,1628.3119 4980.5,1649.5588 4980.5,1670.2191 C4980.5,1680.5492 4980.5,1690.7327 4980.5,1700.5423 C4980.5,1701.7685 4980.5,1702.9889 4980.5,1704.2029 C4980.5,1704.81 4980.5,1705.4154 4980.5,1706.0193 " fill="none" id="CheckoutSvc-to-WS" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="4980.5,1706.0193,4984.5,1697.0193,4980.5,1701.0193,4976.5,1697.0193,4980.5,1706.0193" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="197" x="5042.5" y="1263.8638">разворачивает Tree в workdir</text></g><!--MD5=[d10b420c6a424fae11b0d3ee4143ad14]
+link LogSvc to Objects--><g id="link_LogSvc_Objects"><path d="M1058.86,744.9069 C1092.71,754.3469 1132.64,763.9169 1169.5,768.7969 C1467.8,808.3069 3582.76,738.1869 3877.5,798.7969 C4001.52,824.2969 4140.5,781.6769 4140.5,908.2969 C4140.5,908.2969 4140.5,908.2969 4140.5,1325.2969 C4140.5,1370.2069 4167.34,1415.8269 4188.25,1444.5369 " fill="none" id="LogSvc-to-Objects" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="4191.29,1448.6569,4189.1505,1439.0432,4188.3152,1444.6381,4182.7204,1443.8029,4191.29,1448.6569" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="165" x="4141.5" y="1133.8638">читает цепочку Commit</text></g><!--MD5=[c1555baf88d2ba99e9ae22f4584b628f]
+link MergeSvc to MergeModel--><g id="link_MergeSvc_MergeModel"><path d="M2453.03,744.8869 C2487.77,754.3269 2528.73,763.8969 2566.5,768.7969 C2637.55,778.0069 5084.47,761.2769 5145.5,798.7969 C5192.24,827.5369 5202.5,853.4269 5202.5,908.2969 C5202.5,908.2969 5202.5,908.2969 5202.5,1195.2969 C5202.5,1228.9669 5204.04,1243.7169 5180.5,1267.7969 C5046.3,1405.0569 4819.48,1451.1169 4678.01,1466.5469 " fill="none" id="MergeSvc-to-MergeModel" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="4673.01,1467.0869,4682.3825,1470.1129,4677.982,1466.5582,4681.5367,1462.1578,4673.01,1467.0869" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="210" x="5203.5" y="1133.8638">формирует MergeResult/Conflict</text></g><!--MD5=[e90ab50c472669a9322834a0e046837b]
+link MergeSvc to Diff--><g id="link_MergeSvc_Diff"><path d="M2453.02,744.9069 C2487.76,754.3469 2528.73,763.9169 2566.5,768.7969 C2878.37,809.0569 5083.1,772.9369 5396.5,798.7969 C5468.67,804.7469 5491.26,794.5469 5557.5,823.7969 C5586.8,836.7369 5614.78,859.9969 5634.48,878.8369 " fill="none" id="MergeSvc-to-Diff" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="5638.31,882.5469,5634.6267,873.4127,5634.7179,879.0688,5629.0618,879.16,5638.31,882.5469" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="150" x="5535.5" y="811.8638">вычисляет изменения</text></g><!--MD5=[e00d8b8f7e44fafc7988787ff795197c]
+link MergeSvc to Planner--><g id="link_MergeSvc_Planner"><path d="M2453.03,744.8969 C2487.77,754.3369 2528.73,763.9069 2566.5,768.7969 C2713.17,787.7869 5086.91,756.0669 5228.5,798.7969 C5281.19,814.6969 5332.99,852.4569 5365.07,879.1669 " fill="none" id="MergeSvc-to-Planner" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="5369.26,882.6969,5364.9554,873.8385,5365.4366,879.4749,5359.8002,879.956,5369.26,882.6969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118" x="5269.5" y="811.8638">планирует merge</text></g><!--MD5=[7bfb4dbfdb876ff3e5101178b578184f]
+link MergeSvc to CrSvc--><g id="link_MergeSvc_CrSvc"><path d="M2362.1,745.1769 C2352.25,779.6769 2334.83,840.6369 2324.31,877.4769 " fill="none" id="MergeSvc-to-CrSvc" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2322.81,882.7269,2329.1286,875.172,2324.1836,877.9193,2321.4364,872.9743,2322.81,882.7269" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="157" x="2346.5" y="811.8638">разрешает конфликты</text></g><!--MD5=[2c1edd47c5e80ddf1c45031d5c9f205d]
+link Repo to Workdir--><g id="link_Repo_Workdir"><path d="M4514.81,1634.1269 C4512.63,1667.3669 4508.84,1725.0569 4506.52,1760.5269 " fill="none" id="Repo-to-Workdir" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="4506.19,1765.5969,4510.7732,1756.8794,4506.5188,1760.6077,4502.7905,1756.3533,4506.19,1765.5969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="70" x="4513.5" y="1678.8638">содержит</text></g><!--MD5=[f3ba7ec48a542ca498bc77d1e84a847c]
+link Repo to Index--><g id="link_Repo_Index"><path d="M4567.58,1633.8469 C4597.94,1649.4869 4636.96,1670.3569 4670.5,1690.7969 C4707.69,1713.4669 4748.39,1741.7869 4777.34,1762.5869 " fill="none" id="Repo-to-Index" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="4781.53,1765.5969,4776.5539,1757.0975,4777.4691,1762.6799,4771.8867,1763.595,4781.53,1765.5969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="70" x="4654.5" y="1678.8638">содержит</text></g><!--MD5=[7d153eab7bad5925b336eccd54635bfa]
+link Repo to Store--><g id="link_Repo_Store"><path d="M4383.21,1608.5069 C4125.64,1610.4669 3569.25,1622.7469 3391.5,1690.7969 C3351.54,1706.0969 3313.79,1737.9569 3289.36,1761.7369 " fill="none" id="Repo-to-Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3285.56,1765.4769,3294.7876,1762.0344,3289.1311,1761.9772,3289.1882,1756.3207,3285.56,1765.4769" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="70" x="3480.5" y="1678.8638">содержит</text></g><!--MD5=[72b726b9a39d7659c0b3de33a79d5728]
+link Refs to Repo--><g id="link_Refs_Repo"><path d="M3948.87,1501.8669 C3968.78,1510.5469 3991.82,1519.6069 4013.5,1525.7969 C4134.35,1560.2769 4276.02,1581.2869 4378.16,1593.1469 " fill="none" id="Refs-to-Repo" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="4383.3,1593.7369,4374.8156,1588.7353,4378.3327,1593.1659,4373.9021,1596.683,4383.3,1593.7369" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="120" x="4108.5" y="1546.8638">относится к репо</text></g><!--MD5=[7f0c20c0bab676f741dc61be2c5c27fa]
+reverse link Store to Loose--><g id="link_Store_Loose"><path d="M3271.64,1838.7769 C3276.66,1861.2869 3282.54,1887.6369 3286.77,1906.6169 " fill="none" id="Store-backto-Loose" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="3264.78,1840.1569,3267.26,1819.1169,3278.44,1837.1169,3264.78,1840.1569" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b697a547f7c2d2c488f54c418fe0accf]
+reverse link Store to Pack--><g id="link_Store_Pack"><path d="M3197.02,1828.7269 C3152.66,1853.0969 3094.79,1884.8869 3054.93,1906.7869 " fill="none" id="Store-backto-Pack" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="3193.9,1822.4469,3214.8,1818.9569,3200.64,1834.7169,3193.9,1822.4469" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f1ed7f08449c05e836f149c434c91002]
+link Loose to Compressor--><g id="link_Loose_Compressor"><path d="M3239.41,1959.9069 C3190.17,1983.6569 3117.05,2018.9369 3066.34,2043.3969 " fill="none" id="Loose-to-Compressor" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3061.81,2045.5869,3071.654,2045.2781,3066.3131,2043.4139,3068.1773,2038.0731,3061.81,2045.5869" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9a52e341efbb6df0dfa683ef7e5d4f3f]
+link Pack to Compressor--><g id="link_Pack_Compressor"><path d="M3008.5,1960.0669 C3008.5,1982.9369 3008.5,2016.3769 3008.5,2040.6169 " fill="none" id="Pack-to-Compressor" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3008.5,2045.6469,3012.5,2036.6469,3008.5,2040.6469,3004.5,2036.6469,3008.5,2045.6469" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[c46b3ee9ab483481d026ea9d623e48bd]
+link RemoteSvc to Transport--><g id="link_RemoteSvc_Transport"><path d="M359.85,744.9169 C384.27,754.3569 413.27,763.9269 440.5,768.7969 C721.07,818.9569 2730.02,725.6869 3005.5,798.7969 C3056.9,812.4369 3105.53,851.5169 3134.92,879.0869 " fill="none" id="RemoteSvc-to-Transport" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3138.76,882.7269,3134.9844,873.6305,3135.1329,879.2854,3129.478,879.4339,3138.76,882.7269" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="125" x="3044.5" y="811.8638">сетевой протокол</text></g><!--MD5=[3f1165dab17f359d4ddd8a563771e52f]
+reverse link Transport to Http--><g id="link_Transport_Http"><path d="M3156.28,955.7469 C3152.13,981.8569 3147.06,1013.7169 3143.59,1035.5569 " fill="none" id="Transport-backto-Http" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="3149.38,954.5669,3159.43,935.9169,3163.2,956.7669,3149.38,954.5669" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ed282ac1cbe9634e51ed22ba8ad04f47]
+link RemoteSvc to PackBuilder--><g id="link_RemoteSvc_PackBuilder"><path d="M359.86,744.8769 C384.28,754.3169 413.27,763.8869 440.5,768.7969 C497.15,779.0069 2465.84,765.0869 2512.5,798.7969 C2554.26,828.9669 2550.5,856.7869 2550.5,908.2969 C2550.5,908.2969 2550.5,908.2969 2550.5,1793.2969 C2550.5,1843.2569 2595.92,1880.8369 2635.92,1904.2469 " fill="none" id="RemoteSvc-to-PackBuilder" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2640.27,1906.7469,2634.477,1898.7819,2635.9403,1904.2462,2630.4759,1905.7095,2640.27,1906.7469" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="130" x="2551.5" y="1328.8638">pack для передачи</text></g><!--MD5=[298be9252682f65a11604a5fd29c0e77]
+link PackBuilder to Compressor--><g id="link_PackBuilder_Compressor"><path d="M2754.01,1959.9069 C2808.48,1983.7469 2889.45,2019.1869 2945.36,2043.6569 " fill="none" id="PackBuilder-to-Compressor" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2950.02,2045.6969,2943.3886,2038.4151,2945.4422,2043.686,2940.1712,2045.7397,2950.02,2045.6969" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="52" x="2880.5" y="2011.8638">сжатие</text></g><!--MD5=[f5a58ba4f222595ffd0744e2b6264e78]
+link RemoteSvc to Mirror--><g id="link_RemoteSvc_Mirror"><path d="M359.86,744.8869 C384.28,754.3169 413.27,763.8969 440.5,768.7969 C557.3,789.8169 2465.71,756.2469 2576.5,798.7969 C2618.6,814.9669 2655.89,852.2169 2678.55,878.7669 " fill="none" id="RemoteSvc-to-Mirror" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2681.79,882.6069,2679.0459,873.148,2678.5667,878.7845,2672.9302,878.3053,2681.79,882.6069" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="144" x="2608.5" y="811.8638">обновить remote refs</text></g><!--MD5=[70fb2e01733d4f4d1f9779c635089cbe]
+link RemoteSvc to RCfg--><g id="link_RemoteSvc_RCfg"><path d="M359.85,744.9069 C384.28,754.3369 413.27,763.9069 440.5,768.7969 C694.36,814.3369 2509.79,742.5669 2761.5,798.7969 C2817.11,811.2169 2870.78,851.3069 2902.97,879.3569 " fill="none" id="RemoteSvc-to-RCfg" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2906.79,882.7169,2902.6846,873.7645,2903.0396,879.4102,2897.3939,879.7652,2906.79,882.7169" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="188" x="2808.5" y="811.8638">читает конфиг удалённого</text></g><!--MD5=[237db87a566a2df4ab16ab080ac5128f]
+link Http to RepoCtl--><g id="link_Http_RepoCtl"><path d="M3169.94,1088.9969 C3189.67,1104.6869 3216.45,1124.2669 3242.5,1137.7969 C3263.44,1148.6769 3286.98,1158.1669 3309.45,1166.0769 " fill="none" id="Http-to-RepoCtl" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="3314.23,1167.7369,3307.0658,1160.9786,3309.5129,1166.0788,3304.4128,1168.5259,3314.23,1167.7369" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="130" x="3243.5" y="1133.8638">запросы clone/fetch</text></g><!--MD5=[ad44e3f836875682e315cc3dec3e2d4a]
+link Http to PushCtl--><g id="link_Http_PushCtl"><path d="M3210.73,1088.8469 C3237.88,1097.6869 3269.32,1106.8569 3298.5,1112.7969 C3333.52,1119.9169 3343.6,1113.1369 3378.5,1120.7969 C3427.73,1131.6069 3481.43,1150.2669 3522.2,1165.9569 " fill="none" id="Http-to-PushCtl" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="3527.1,1167.8569,3520.1401,1160.8884,3522.4344,1166.0591,3517.2637,1168.3534,3527.1,1167.8569" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="3437.5" y="1133.8638">запросы push</text></g><!--MD5=[b0e026cc957792fd42acc91749cfc305]
+link Server to RepoCtl--><g id="link_Server_RepoCtl"><path d="M3545.66,1089.0069 C3540.39,1104.7069 3531.73,1124.2869 3518.5,1137.7969 C3507.77,1148.7569 3494.45,1157.8469 3480.71,1165.2769 " fill="none" id="Server-to-RepoCtl" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3476.03,1167.7369,3485.8591,1167.1136,3480.4614,1165.4211,3482.1539,1160.0234,3476.03,1167.7369" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[26c6d63dae3ef38e636f3ccf97db724e]
+link Server to PushCtl--><g id="link_Server_PushCtl"><path d="M3559.61,1088.9769 C3565.48,1110.1669 3573.82,1140.2869 3580.03,1162.7169 " fill="none" id="Server-to-PushCtl" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3581.4,1167.6669,3582.8348,1157.9231,3580.0566,1162.8507,3575.129,1160.0725,3581.4,1167.6669" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[dfc994fcb836ed339d2128791e03f996]
+link RepoCtl to SRepoSvc--><g id="link_RepoCtl_SRepoSvc"><path d="M3425.9,1220.8969 C3444.29,1241.9069 3470.35,1271.6969 3489.63,1293.7269 " fill="none" id="RepoCtl-to-SRepoSvc" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3493.14,1297.7469,3490.2238,1288.3397,3489.8475,1293.984,3484.2032,1293.6077,3493.14,1297.7469" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1f40d7a3382ed1e0bbf2f77ef30fb1e9]
+link PushCtl to SRepoSvc--><g id="link_PushCtl_SRepoSvc"><path d="M3573.9,1220.8969 C3562.02,1241.7369 3545.21,1271.1969 3532.68,1293.1769 " fill="none" id="PushCtl-to-SRepoSvc" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3530.07,1297.7469,3537.9979,1291.9032,3532.543,1293.4013,3531.0449,1287.9464,3530.07,1297.7469" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[82c956cbad5c3b80dd9b287d3a70374e]
+link SRepoSvc to Store--><g id="link_SRepoSvc_Store"><path d="M3395.75,1334.7569 C3358.93,1343.7469 3321.76,1360.1769 3297.5,1389.7969 C3207.64,1499.5069 3237.48,1687.0969 3253.83,1760.5369 " fill="none" id="SRepoSvc-to-Store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3254.98,1765.6169,3256.8994,1755.9569,3253.8787,1760.7397,3249.0959,1757.7189,3254.98,1765.6169" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a637769692a4c08b4d938e6187eff847]
+link SRepoSvc to Refs--><g id="link_SRepoSvc_Refs"><path d="M3635.22,1350.4369 C3674.34,1360.4969 3717.49,1373.6069 3755.5,1389.7969 C3790.95,1404.9069 3828.17,1427.7469 3855.31,1445.8769 " fill="none" id="SRepoSvc-to-Refs" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3859.58,1448.7369,3854.3301,1440.4039,3855.4263,1445.9535,3849.8767,1447.0497,3859.58,1448.7369" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a1c8e9382d7b13ac88f5ac5361c3f779]
+link SRepoSvc to ACL--><g id="link_SRepoSvc_ACL"><path d="M3543.62,1350.8269 C3556.48,1362.5969 3571.85,1376.8069 3585.5,1389.7969 C3604.53,1407.9069 3625.57,1428.5669 3642.08,1444.9269 " fill="none" id="SRepoSvc-to-ACL" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3645.74,1448.5669,3642.1674,1439.3888,3642.1902,1445.0456,3636.5334,1445.0684,3645.74,1448.5669" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[60f1c2a850c38c2d924edc52fddd00de]
+link SRepoSvc to Auth--><g id="link_SRepoSvc_Auth"><path d="M3502.78,1350.9069 C3489.97,1376.7069 3470.2,1416.5169 3456.6,1443.8969 " fill="none" id="SRepoSvc-to-Auth" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3454.3,1448.5169,3461.8785,1442.2267,3456.5189,1444.0362,3454.7094,1438.6765,3454.3,1448.5169" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[3b995437225645e251589b2ee3707de9]
+link CommitSvc to GMN836--><g id="link_CommitSvc_GMN836"><path d="M1718.31,691.7169 C1750.27,666.8769 1802.12,631.5069 1854,617.0469 C1910.73,601.2369 2856.27,605.4369 2914,617.0469 C2970.16,628.3469 3029.54,653.0469 3075.37,675.2269 " fill="none" id="CommitSvc-GMN836" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[6f0317b0f8e1c9582afae48056dca4a3]
+link CheckoutSvc to GMN839--><g id="link_CheckoutSvc_GMN839"><path d="M2040.42,691.6769 C2076.4,666.8069 2134.4,631.4169 2191,617.0469 C2254.11,601.0169 3299.5,602.6269 3363,617.0469 C3413.02,628.4069 3465.04,653.1069 3504.97,675.2669 " fill="none" id="CheckoutSvc-GMN839" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[93975827fc016a33740d826a3b605087]
+link LogSvc to GMN842--><g id="link_LogSvc_GMN842"><path d="M1018.36,691.6469 C1059.15,666.7469 1124.59,631.3369 1187,617.0469 C1260.65,600.1869 2473.48,599.6169 2547,617.0469 C2600.33,629.6969 2655.6,658.7869 2694.73,682.5569 " fill="none" id="LogSvc-GMN842" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[6f115e321e362dd4198f824eea36ce5f]
+link MergeSvc to GMN845--><g id="link_MergeSvc_GMN845"><path d="M2411.43,691.6369 C2453.26,666.7369 2520.31,631.3269 2584,617.0469 C2647.32,602.8569 3688.16,605.4469 3752,617.0469 C3807.08,627.0469 3865.55,647.6869 3913.9,667.7269 " fill="none" id="MergeSvc-GMN845" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[a7af019b9058881e25664ce50a8fb9d8]
+link ST to GMN851--><g id="link_ST_GMN851"><path d="M3430.7051,1797.3737 C3430.9915,1797.5159 3431.2848,1797.6614 3431.5848,1797.8103 C3432.185,1798.1082 3432.8123,1798.4196 3433.466,1798.744 C3434.7735,1799.393 3436.1866,1800.0944 3437.6992,1800.8451 C3440.7244,1802.3467 3444.1475,1804.0458 3447.9192,1805.918 C3463.0059,1813.4066 3483.6694,1823.6638 3506.7488,1835.1206 C3552.9075,1858.0344 3608.73,1885.7469 3648.93,1905.7069 " fill="none" id="ST-GMN851" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[d9e95535aa399c7affc8548739869e2a]
+link WS to GMN854--><g id="link_WS_GMN854"><path d="M4980.5,1842.918 C4980.5,1843.0899 4980.5,1843.2619 4980.5,1843.4341 C4980.5,1844.8118 4980.5,1846.2004 4980.5,1847.5978 C4980.5,1853.187 4980.5,1858.9141 4980.5,1864.6248 C4980.5,1876.0463 4980.5,1887.4019 4980.5,1897.4569 " fill="none" id="WS-GMN854" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/></g><!--MD5=[7f9cac1ff904fc25aa915cde26ca3a24]
+@startuml
+title VCS — Диаграмма компонентов
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+' =========================
+' CLI (консоль)
+' =========================
+package "CLI\n(консольный интерфейс)" as CLI {
+  [ConsoleApp\nТочка входа: main()] as ConsoleApp
+  [CommandParser\nПарсинг argv -> команда] as Parser
+  [Commands\nНабор команд CLI] as Commands
+}
+
+' =========================
+' Library API (публичное API как библиотека)
+' =========================
+package "Library API\n(публичная библиотека)" as API {
+  [VcsFacade\nЕдиная точка входа API] as Facade
+}
+
+' =========================
+' Application Services (сценарии использования / use-cases)
+' =========================
+package "Application Services\n(сервисный слой)" as APP {
+  [RepoService\nОткрыть/инициализировать репозиторий] as RepoSvc
+  [CommitService\nСбор состояния -> новый commit] as CommitSvc
+  [BranchService\nСоздать/удалить ветку, резолвить имя] as BranchSvc
+  [CheckoutService\nРазвернуть ревизию в рабочую копию] as CheckoutSvc
+  [LogService\nПолучить историю коммитов текущей ветки] as LogSvc
+  [MergeService\nСлить ветки, сформировать результат merge] as MergeSvc
+  [RemoteService\nclone/fetch/pull/push сценарии] as RemoteSvc
+  [ConflictResolutionService\nРазрешение конфликтов (интерактивно/авто)] as CrSvc
+}
+
+' =========================
+' Domain Model (ядро понятий VCS)
+' =========================
+package "Domain Model\n(ядро предметной области)" as DOMAIN {
+  [Repository\nАгрегат: workdir/index/refs/objects] as Repo
+  [Objects\nCommit/Tree/Blob как иммутабельные объекты] as Objects
+  [Refs\nВетки, HEAD, remote refs] as Refs
+  [Merge Model\nConflict/Resolution/MergeResult] as MergeModel
+}
+
+' =========================
+' Workspace (жизненный цикл файлов)
+' =========================
+package "Workspace\n(рабочая копия и индекс)" as WS {
+  [WorkingDirectory\nЧтение/запись файлов пользователя] as Workdir
+  [Index\nStaging area: подготовка снимка] as Index
+}
+
+' =========================
+' Storage (хранилище объектов + компрессия)
+' =========================
+package "Storage\n(объекты/pack/компрессия)" as ST {
+  [ObjectStore\nИнтерфейс хранения объектов] as Store
+  [LooseStore\nОтдельные объекты по id] as Loose
+  [PackStore\nPack для эффективности/передачи] as Pack
+  [Compressor\nСтратегия сжатия/распаковки] as Compressor
+  [PackBuilder\nСобрать pack из набора объектов] as PackBuilder
+}
+
+' =========================
+' Diff/Merge Engine (алгоритмы)
+' =========================
+package "Diff/Merge Engine\n(алгоритмы сравнения/слияния)" as DME {
+  [DiffEngine\ndiff деревьев/файлов] as Diff
+  [MergePlanner\nплан действий merge + конфликты] as Planner
+}
+
+' =========================
+' Remote client
+' =========================
+package "Remote Client\n(клиент удалённого)" as RC {
+  [RemoteTransport\nАбстракция протокола] as Transport
+  [HttpTransport\nHTTP реализация транспорта] as Http
+  [RemoteRepoMirror\nОбновление remote refs] as Mirror
+  [RemoteConfig\nURL + настройки remote] as RCfg
+}
+
+' =========================
+' Server side
+' =========================
+package "Server\n(удалённый сервер репозиториев)" as SRV {
+  [VcsServer\nПроцесс/служба сервера] as Server
+  [RepoController\nclone/fetch endpoint'ы] as RepoCtl
+  [PushController\npush endpoint] as PushCtl
+  [ServerRepoService\nСоздать/применить pack, refs] as SRepoSvc
+  [AccessControl\nПрава read/write] as ACL
+  [AuthService\nАутентификация пользователя] as Auth
+}
+
+' =========================
+' Связи (зависимости)
+' =========================
+ConsoleApp - -> Parser : запускает
+Parser - -> Commands : создаёт/выбирает
+Commands - -> Facade : вызывает API
+
+Facade - -> RepoSvc
+Facade - -> CommitSvc
+Facade - -> BranchSvc
+Facade - -> CheckoutSvc
+Facade - -> LogSvc
+Facade - -> MergeSvc
+Facade - -> RemoteSvc
+
+RepoSvc - -> Repo : создаёт/открывает
+CommitSvc - -> Repo : читает workdir/index, пишет objects/refs
+BranchSvc - -> Refs : управляет ветками/HEAD
+CheckoutSvc - -> WS : разворачивает Tree в workdir
+LogSvc - -> Objects : читает цепочку Commit
+MergeSvc - -> MergeModel : формирует MergeResult/Conflict
+MergeSvc - -> Diff : вычисляет изменения
+MergeSvc - -> Planner : планирует merge
+MergeSvc - -> CrSvc : разрешает конфликты
+
+Repo - -> Workdir : содержит
+Repo - -> Index : содержит
+Repo - -> Store : содержит
+Refs - -> Repo : относится к репо
+
+Store <|.. Loose
+Store <|.. Pack
+Loose - -> Compressor
+Pack - -> Compressor
+
+RemoteSvc - -> Transport : сетевой протокол
+Transport <|.. Http
+RemoteSvc - -> PackBuilder : pack для передачи
+PackBuilder - -> Compressor : сжатие
+RemoteSvc - -> Mirror : обновить remote refs
+RemoteSvc - -> RCfg : читает конфиг удалённого
+
+Http ..> RepoCtl : запросы clone/fetch
+Http ..> PushCtl : запросы push
+
+Server - -> RepoCtl
+Server - -> PushCtl
+RepoCtl - -> SRepoSvc
+PushCtl - -> SRepoSvc
+SRepoSvc - -> Store
+SRepoSvc - -> Refs
+SRepoSvc - -> ACL
+SRepoSvc - -> Auth
+
+' =========================
+' Комментарии к процессам (как это работает)
+' =========================
+note right of CommitSvc
+Процесс commit:
+1) Index.writeTree() строит Tree из staged файлов
+2) Создаётся Commit(tree, parents, author, date, message)
+3) Commit/Tree/Blob кладутся в ObjectStore (loose/pack)
+4) Обновляется ref текущей ветки и HEAD
+end note
+
+note right of CheckoutSvc
+Процесс checkout:
+1) resolveRevision(nameOrId) -> RevisionId
+2) RevisionId -> Commit -> Tree
+3) WorkingDirectory приводится к состоянию Tree
+4) Index синхронизируется (CLEAN)
+end note
+
+note right of LogSvc
+Процесс log:
+идём от HEAD по parents (Commit graph),
+собираем CommitInfo (id/message/author/date)
+в пределах текущей ветки (по ref).
+end note
+
+note right of MergeSvc
+Процесс merge:
+1) base = merge-base(ours, theirs) (можно как часть MergePlanner)
+2) DiffEngine: base->ours, base->theirs
+3) MergePlanner: действия APPLY_* или CONFLICT по path
+4) ConflictResolutionService/Resolver: выбирает стратегию
+5) Если без конфликтов: создаётся merge commit (2 родителя)
+end note
+
+note top of RemoteSvc
+Процессы удалённых операций:
+clone: скачать refs + pack -> распаковать -> локальный repo
+fetch: wants/haves -> download pack -> обновить remote refs
+pull: fetch + (merge/rebase стратегия, здесь merge в текущую ветку)
+push: собрать недостающие объекты в pack -> upload -> обновить refs на сервере
+end note
+
+note bottom of ST
+Компрессия:
+Compressor как стратегия — можно включить/выключить/заменить.
+Pack — оптимизация хранения/передачи, loose — простая модель.
+end note
+
+note bottom of WS
+Жизненный цикл файла в системе:
+WorkingDirectory хранит текущее состояние пользователя,
+Index — staged (подготовлено к коммиту),
+Commit — иммутабельный снимок через Tree/Blob.
+end note
+@enduml
+
+@startuml
+title VCS — Диаграмма компонентов
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+package "CLI\n(консольный интерфейс)" as CLI {
+  [ConsoleApp\nТочка входа: main()] as ConsoleApp
+  [CommandParser\nПарсинг argv -> команда] as Parser
+  [Commands\nНабор команд CLI] as Commands
+}
+
+package "Library API\n(публичная библиотека)" as API {
+  [VcsFacade\nЕдиная точка входа API] as Facade
+}
+
+package "Application Services\n(сервисный слой)" as APP {
+  [RepoService\nОткрыть/инициализировать репозиторий] as RepoSvc
+  [CommitService\nСбор состояния -> новый commit] as CommitSvc
+  [BranchService\nСоздать/удалить ветку, резолвить имя] as BranchSvc
+  [CheckoutService\nРазвернуть ревизию в рабочую копию] as CheckoutSvc
+  [LogService\nПолучить историю коммитов текущей ветки] as LogSvc
+  [MergeService\nСлить ветки, сформировать результат merge] as MergeSvc
+  [RemoteService\nclone/fetch/pull/push сценарии] as RemoteSvc
+  [ConflictResolutionService\nРазрешение конфликтов (интерактивно/авто)] as CrSvc
+}
+
+package "Domain Model\n(ядро предметной области)" as DOMAIN {
+  [Repository\nАгрегат: workdir/index/refs/objects] as Repo
+  [Objects\nCommit/Tree/Blob как иммутабельные объекты] as Objects
+  [Refs\nВетки, HEAD, remote refs] as Refs
+  [Merge Model\nConflict/Resolution/MergeResult] as MergeModel
+}
+
+package "Workspace\n(рабочая копия и индекс)" as WS {
+  [WorkingDirectory\nЧтение/запись файлов пользователя] as Workdir
+  [Index\nStaging area: подготовка снимка] as Index
+}
+
+package "Storage\n(объекты/pack/компрессия)" as ST {
+  [ObjectStore\nИнтерфейс хранения объектов] as Store
+  [LooseStore\nОтдельные объекты по id] as Loose
+  [PackStore\nPack для эффективности/передачи] as Pack
+  [Compressor\nСтратегия сжатия/распаковки] as Compressor
+  [PackBuilder\nСобрать pack из набора объектов] as PackBuilder
+}
+
+package "Diff/Merge Engine\n(алгоритмы сравнения/слияния)" as DME {
+  [DiffEngine\ndiff деревьев/файлов] as Diff
+  [MergePlanner\nплан действий merge + конфликты] as Planner
+}
+
+package "Remote Client\n(клиент удалённого)" as RC {
+  [RemoteTransport\nАбстракция протокола] as Transport
+  [HttpTransport\nHTTP реализация транспорта] as Http
+  [RemoteRepoMirror\nОбновление remote refs] as Mirror
+  [RemoteConfig\nURL + настройки remote] as RCfg
+}
+
+package "Server\n(удалённый сервер репозиториев)" as SRV {
+  [VcsServer\nПроцесс/служба сервера] as Server
+  [RepoController\nclone/fetch endpoint'ы] as RepoCtl
+  [PushController\npush endpoint] as PushCtl
+  [ServerRepoService\nСоздать/применить pack, refs] as SRepoSvc
+  [AccessControl\nПрава read/write] as ACL
+  [AuthService\nАутентификация пользователя] as Auth
+}
+
+ConsoleApp - -> Parser : запускает
+Parser - -> Commands : создаёт/выбирает
+Commands - -> Facade : вызывает API
+
+Facade - -> RepoSvc
+Facade - -> CommitSvc
+Facade - -> BranchSvc
+Facade - -> CheckoutSvc
+Facade - -> LogSvc
+Facade - -> MergeSvc
+Facade - -> RemoteSvc
+
+RepoSvc - -> Repo : создаёт/открывает
+CommitSvc - -> Repo : читает workdir/index, пишет objects/refs
+BranchSvc - -> Refs : управляет ветками/HEAD
+CheckoutSvc - -> WS : разворачивает Tree в workdir
+LogSvc - -> Objects : читает цепочку Commit
+MergeSvc - -> MergeModel : формирует MergeResult/Conflict
+MergeSvc - -> Diff : вычисляет изменения
+MergeSvc - -> Planner : планирует merge
+MergeSvc - -> CrSvc : разрешает конфликты
+
+Repo - -> Workdir : содержит
+Repo - -> Index : содержит
+Repo - -> Store : содержит
+Refs - -> Repo : относится к репо
+
+Store <|.. Loose
+Store <|.. Pack
+Loose - -> Compressor
+Pack - -> Compressor
+
+RemoteSvc - -> Transport : сетевой протокол
+Transport <|.. Http
+RemoteSvc - -> PackBuilder : pack для передачи
+PackBuilder - -> Compressor : сжатие
+RemoteSvc - -> Mirror : обновить remote refs
+RemoteSvc - -> RCfg : читает конфиг удалённого
+
+Http ..> RepoCtl : запросы clone/fetch
+Http ..> PushCtl : запросы push
+
+Server - -> RepoCtl
+Server - -> PushCtl
+RepoCtl - -> SRepoSvc
+PushCtl - -> SRepoSvc
+SRepoSvc - -> Store
+SRepoSvc - -> Refs
+SRepoSvc - -> ACL
+SRepoSvc - -> Auth
+
+note right of CommitSvc
+Процесс commit:
+1) Index.writeTree() строит Tree из staged файлов
+2) Создаётся Commit(tree, parents, author, date, message)
+3) Commit/Tree/Blob кладутся в ObjectStore (loose/pack)
+4) Обновляется ref текущей ветки и HEAD
+end note
+
+note right of CheckoutSvc
+Процесс checkout:
+1) resolveRevision(nameOrId) -> RevisionId
+2) RevisionId -> Commit -> Tree
+3) WorkingDirectory приводится к состоянию Tree
+4) Index синхронизируется (CLEAN)
+end note
+
+note right of LogSvc
+Процесс log:
+идём от HEAD по parents (Commit graph),
+собираем CommitInfo (id/message/author/date)
+в пределах текущей ветки (по ref).
+end note
+
+note right of MergeSvc
+Процесс merge:
+1) base = merge-base(ours, theirs) (можно как часть MergePlanner)
+2) DiffEngine: base->ours, base->theirs
+3) MergePlanner: действия APPLY_* или CONFLICT по path
+4) ConflictResolutionService/Resolver: выбирает стратегию
+5) Если без конфликтов: создаётся merge commit (2 родителя)
+end note
+
+note top of RemoteSvc
+Процессы удалённых операций:
+clone: скачать refs + pack -> распаковать -> локальный repo
+fetch: wants/haves -> download pack -> обновить remote refs
+pull: fetch + (merge/rebase стратегия, здесь merge в текущую ветку)
+push: собрать недостающие объекты в pack -> upload -> обновить refs на сервере
+end note
+
+note bottom of ST
+Компрессия:
+Compressor как стратегия — можно включить/выключить/заменить.
+Pack — оптимизация хранения/передачи, loose — простая модель.
+end note
+
+note bottom of WS
+Жизненный цикл файла в системе:
+WorkingDirectory хранит текущее состояние пользователя,
+Index — staged (подготовлено к коммиту),
+Commit — иммутабельный снимок через Tree/Blob.
+end note
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
