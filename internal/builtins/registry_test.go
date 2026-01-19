@@ -57,7 +57,7 @@ func TestRegistry_IsBuiltin(t *testing.T) {
 	}{
 		{"builtin command", "echo", true},
 		{"builtin command", "cat", true},
-		{"non-builtin command", "ls", false},
+		{"non-builtin command", "ping", false},
 		{"empty command", "", false},
 	}
 
@@ -77,7 +77,7 @@ func TestRegistry_List(t *testing.T) {
 	registry := NewRegistry()
 	commands := registry.List()
 
-	expectedCount := 6 // cat, echo, wc, pwd, exit, grep
+	expectedCount := 8 // cat, echo, wc, pwd, exit, grep
 	if len(commands) != expectedCount {
 		t.Errorf("Registry.List() returned %d commands, expected %d", len(commands), expectedCount)
 	}
